@@ -1,4 +1,4 @@
-package net.fabricmc.example;
+package com.github.draylar.modid.ExampleMod;
 
 import net.fabricmc.api.ModInitializer;
 

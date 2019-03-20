@@ -1,4 +1,4 @@
-package net.fabricmc.example.mixin;
+package com.github.draylar.modid.ExampleMixin;
 
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
