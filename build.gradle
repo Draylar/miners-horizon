@@ -16,12 +16,12 @@ repositories {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:19w12b"
-	mappings "net.fabricmc:yarn:19w12b.3"
+	minecraft "com.mojang:minecraft:19w13b"
+	mappings "net.fabricmc:yarn:19w13b.9"
 	modCompile "net.fabricmc:fabric-loader:0.3.7.109"
 
 	//Fabric api
-	modCompile "net.fabricmc:fabric:0.2.5.114"
+	modCompile "net.fabricmc:fabric:0.2.6.117"
 
 	modCompile "com.jamieswhiteshirt:developer-mode:1.0.8"
 }
