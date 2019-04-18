@@ -1,8 +1,9 @@
 {
   "required": true,
-  "package": "com.github.draylar.modid.mixin",
+  "package": "com.github.draylar.fabric.world.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "MixinPortalForcer"
   ],
   "injectors": {
     "defaultRequire": 1
