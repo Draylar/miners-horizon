@@ -1,17 +1,30 @@
 {
-  "id": "fabric-dimensions",
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
-  "version": "1.0.0",
-  "side": "universal",
-  "initializers": [
-    "com.github.draylar.fabric.FabricDimensions"
+  "schemaVersion": 1,
+  "id": "miners_horizon",
+  "version": "1.0.2",
+
+  "name": "Miner's Horizon",
+  "description": "Adds in a dimension specifically for mining.",
+  "authors": [
+    "Draylar"
   ],
-  "requires": {
-    "fabric": "*"
+
+  "license": "GPLv3",
+  "icon": "assets/miners_horizon/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.github.draylar.miners_horizon.MinersHorizon"
+    ]
   },
-  "mixins": {
-    "client": "modid.client.json",
-    "common": "modid.common.json"
+
+  "mixins": [
+    "modid.common.json"
+  ],
+
+  "requires": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
   }
 }

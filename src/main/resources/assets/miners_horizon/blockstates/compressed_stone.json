@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "miners_horizon:block/compressed_stone" }
+  }
+}

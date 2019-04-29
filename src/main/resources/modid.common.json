@@ -1,9 +1,11 @@
 {
   "required": true,
-  "package": "com.github.draylar.fabric.world.mixin",
+  "package": "com.github.draylar.miners_horizon.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinPortalForcer"
+    "MixinPortalForcer",
+    "MixinUsePickaxe",
+    "NaturalStoneMixin"
   ],
   "injectors": {
     "defaultRequire": 1
