@@ -11,7 +11,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.ProbabilityConfig;
-import net.minecraft.world.gen.carver.Carver;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -33,8 +32,7 @@ public class MiningDimensionBiome extends Biome
         DefaultBiomeFeatures.addExtraDefaultFlowers(this);
         DefaultBiomeFeatures.addForestFlowers(this);
 
-        this.addCarver(GenerationStep.Carver.AIR, Biome.configureCarver(Carver.CAVE, new ProbabilityConfig(10)));
-
+        this.addCarver(GenerationStep.Carver.AIR, Biome.configureCarver(MinersHorizon.CAVE, new ProbabilityConfig(10)));
 
         if(ConfigHolder.configInstance.enableMineshafts)
             this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(ConfigHolder.configInstance.mineshaftRarity, MineshaftFeature.Type.MESA));
