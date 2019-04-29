@@ -10,6 +10,8 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.ProbabilityConfig;
+import net.minecraft.world.gen.carver.Carver;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -22,7 +24,7 @@ public class MiningDimensionBiome extends Biome
 {
     public MiningDimensionBiome()
     {
-        super(new Settings().configureSurfaceBuilder(MinersHorizon.MINING_BIOME_SURFACE, SurfaceBuilder.GRASS_CONFIG).precipitation(Precipitation.NONE).category(Category.NONE).depth(1).scale(1).temperature(0.7F).downfall(0.0f).waterColor(4159204).waterFogColor(329011).parent(null));
+        super(new Settings().configureSurfaceBuilder(MinersHorizon.MINING_BIOME_SURFACE, SurfaceBuilder.GRASS_CONFIG).precipitation(Precipitation.NONE).category(Category.NONE).depth(1).scale(1).temperature(0.7F).downfall(0.0f).waterColor(4159204).waterFogColor(329011).parent(""));
 
         DefaultBiomeFeatures.addDefaultLakes(this);
         DefaultBiomeFeatures.addDungeons(this);
@@ -30,7 +32,9 @@ public class MiningDimensionBiome extends Biome
         DefaultBiomeFeatures.addDefaultFlowers(this);
         DefaultBiomeFeatures.addExtraDefaultFlowers(this);
         DefaultBiomeFeatures.addForestFlowers(this);
-        DefaultBiomeFeatures.addLandCarvers(this);
+
+        this.addCarver(GenerationStep.Carver.AIR, Biome.configureCarver(Carver.CAVE, new ProbabilityConfig(10)));
+
 
         if(ConfigHolder.configInstance.enableMineshafts)
             this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(ConfigHolder.configInstance.mineshaftRarity, MineshaftFeature.Type.MESA));

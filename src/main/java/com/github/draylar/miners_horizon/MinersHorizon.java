@@ -27,8 +27,8 @@ public class MinersHorizon implements ModInitializer
 
 	public static DimensionType FABRIC_WORLD = new FabricDimensionType(getModIdentifier("miners_horizon"), 5, MinersHorizonDimension::new);
 	public static ChunkGeneratorType FABRIC_CHUNK_GENERATOR = new ChunkGeneratorTypeWorkaround().getChunkGeneratorType(ChunkGeneratorConfig::new);
-	public static Biome MINING_BIOME = Registry.register(Registry.BIOME, getModIdentifier("mining_biome"), new MiningDimensionBiome());
 	public static SurfaceBuilder<TernarySurfaceConfig> MINING_BIOME_SURFACE = Registry.register(Registry.SURFACE_BUILDER, getModIdentifier("mining_surface"), new MiningDimensionSurfaceBuilder());
+	public static Biome MINING_BIOME = Registry.register(Registry.BIOME, getModIdentifier("mining_biome"), new MiningDimensionBiome());
 
 	@Override
 	public void onInitialize()

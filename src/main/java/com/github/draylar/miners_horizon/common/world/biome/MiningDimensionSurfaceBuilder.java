@@ -1,6 +1,5 @@
 package com.github.draylar.miners_horizon.common.world.biome;
 
-import com.github.draylar.miners_horizon.config.ConfigHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -14,9 +13,7 @@ import java.util.Random;
 
 public class MiningDimensionSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig>
 {
-    private static final int zone_1 = ConfigHolder.configInstance.zone1Y;
-    private static final int zone_2 = ConfigHolder.configInstance.zone2Y;
-    private static final int zone_3 = ConfigHolder.configInstance.zone3Y;
+    private static final Random rand = new Random();
 
     public MiningDimensionSurfaceBuilder()
     {
@@ -33,8 +30,6 @@ public class MiningDimensionSurfaceBuilder extends SurfaceBuilder<TernarySurface
     private static void generate(Chunk chunk, int x, int z, int worldHeight, int seaLevel, TernarySurfaceConfig surfaceBlocks)
     {
         // copied from tropical, thanks valo
-        System.out.println("generating");
-
         int x1 = x & 15;
         int z1 = z & 15;
 
@@ -45,39 +40,51 @@ public class MiningDimensionSurfaceBuilder extends SurfaceBuilder<TernarySurface
             if (b == Blocks.STONE)
             {
                 Block aboveState;
-                BlockState material = getUndergroundBlock(j1);
+                BlockState material = getUndergroundBlock();
 
                 if (j1 < 255)
                 {
-                    material = Blocks.STONE.getDefaultState();
+                    material = getUndergroundBlock();
 
                     aboveState = chunk.getBlockState(new BlockPos(x1, j1 + 1, z1)).getBlock();
                     if (aboveState == Blocks.AIR)
-                        material = getUndergroundBlock(j1);
+                        material = getUndergroundBlock();
 
                     else if (j1 < 252)
                     {
                         aboveState = chunk.getBlockState(new BlockPos(x1, j1 + 4, z1)).getBlock();
                         if (aboveState == Blocks.AIR)
-                            material = getUndergroundBlock(j1);
+                            material = getUndergroundBlock();
                     }
                 }
 
                 chunk.setBlockState(new BlockPos(x1, j1, z1), material, false);
+            }
 
-            } else if (b == Blocks.WATER)
+            else if (b == Blocks.WATER)
                 chunk.setBlockState(new BlockPos(x1, j1, z1), Blocks.WATER.getDefaultState(), false);
+
+            else if (b == Blocks.GRASS_BLOCK)
+                chunk.setBlockState(new BlockPos(x1, j1, z1), Blocks.GRASS_BLOCK.getDefaultState(), false);
 
             else
                 chunk.setBlockState(new BlockPos(x1, j1, z1), Blocks.AIR.getDefaultState(), false);
         }
     }
 
-    private static BlockState getUndergroundBlock(int yLevel)
+    private static BlockState getUndergroundBlock()
     {
-        if (yLevel < zone_3) return com.github.draylar.miners_horizon.common.Blocks.COMPRESSED_STONE.getDefaultState();
-        else if (yLevel < zone_2) return com.github.draylar.miners_horizon.common.Blocks.REINFORCED_STONE.getDefaultState();
-        else if (yLevel < zone_1) return com.github.draylar.miners_horizon.common.Blocks.HARDENED_STONE.getDefaultState();
+        int d = rand.nextInt(3);
+        switch(d)
+        {
+            case 0:
+                return Blocks.STONE.getDefaultState();
+            case 1:
+                return Blocks.ANDESITE.getDefaultState();
+            case 2:
+                return Blocks.COBBLESTONE.getDefaultState();
+        }
+
         return Blocks.STONE.getDefaultState();
     }
 }
