@@ -1,8 +1,8 @@
 package com.github.draylar.miners_horizon.common.world;
 
 import com.github.draylar.miners_horizon.MinersHorizon;
+import com.github.draylar.miners_horizon.common.Blocks;
 import com.github.draylar.miners_horizon.config.ConfigHolder;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.noise.NoiseSampler;
 import net.minecraft.util.math.noise.OctaveSimplexNoiseSampler;
@@ -19,6 +19,9 @@ public class MinersHorizonChunkGenerator extends SurfaceChunkGenerator<ChunkGene
     // use a map to determine where peaks are, and a map to determine how tall they are
     private final NoiseSampler surfaceNoise;
     private final int worldMidHeight = ConfigHolder.configInstance.worldMidHeight;
+    private final int zone_1 = ConfigHolder.configInstance.zone1Y;
+    private final int zone_2 = ConfigHolder.configInstance.zone2Y;
+    private final int zone_3 = ConfigHolder.configInstance.zone3Y;
 
     public MinersHorizonChunkGenerator(IWorld world, BiomeSource biomeSource_1, ChunkGeneratorConfig config) {
         super(world, biomeSource_1, 4, 8, 256, config, true);
@@ -42,7 +45,22 @@ public class MinersHorizonChunkGenerator extends SurfaceChunkGenerator<ChunkGene
                 double height = worldMidHeight + surfaceNoise.sample(posX * multiplier, posZ * multiplier, multiplier, multiplier * x);
                 for (int y = 0; y < height; y++)
                 {
-                    chunk_1.setBlockState(new BlockPos(x, y, z), net.minecraft.block.Blocks.STONE.getDefaultState(), false);
+                    if (y < zone_3)
+                        chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.COMPRESSED_STONE.getDefaultState(), false);
+                    else if (y < zone_2)
+                        chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.REINFORCED_STONE.getDefaultState(), false);
+                    else if (y < zone_1)
+                        chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.HARDENED_STONE.getDefaultState(), false);
+                    else if (y < height - 1)
+                    {
+                        int rand = world.getRandom().nextInt(4);
+                        if (rand == 0 || rand == 1)
+                            chunk_1.setBlockState(new BlockPos(x, y, z), net.minecraft.block.Blocks.STONE.getDefaultState(), false);
+                        if (rand == 2)
+                            chunk_1.setBlockState(new BlockPos(x, y, z), net.minecraft.block.Blocks.COBBLESTONE.getDefaultState(), false);
+                        if (rand == 3)
+                            chunk_1.setBlockState(new BlockPos(x, y, z), net.minecraft.block.Blocks.ANDESITE.getDefaultState(), false);
+                    }
                 }
 
                 // spawn in mountains
@@ -62,7 +80,7 @@ public class MinersHorizonChunkGenerator extends SurfaceChunkGenerator<ChunkGene
                     }
                 }
 
-                MinersHorizon.MINING_BIOME.buildSurface(new Random(234612362L * posX + -8264616432452L * posZ), chunk_1, posX, posZ, 255, surfaceNoise.sample(posX, posZ, 1, 1), Blocks.STONE.getDefaultState(), net.minecraft.block.Blocks.WATER.getDefaultState(), getSeaLevel(), 0);
+                MinersHorizon.MINING_BIOME.buildSurface(new Random(234612362L * posX + -8264616432452L * posZ), chunk_1, posX, posZ, 255, surfaceNoise.sample(posX, posZ, 1, 1), Blocks.COMPRESSED_STONE.getDefaultState(), net.minecraft.block.Blocks.WATER.getDefaultState(), getSeaLevel(), world.getSeed());
             }
         }
 

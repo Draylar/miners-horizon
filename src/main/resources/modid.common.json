@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinPortalForcer",
-    "MixinUsePickaxe"
+    "MixinUsePickaxe",
+    "NaturalStoneMixin"
   ],
   "injectors": {
     "defaultRequire": 1
