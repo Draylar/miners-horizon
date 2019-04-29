@@ -1,5 +1,6 @@
 package com.github.draylar.miners_horizon.common.world.biome;
 
+import com.github.draylar.miners_horizon.config.ConfigHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -14,6 +15,9 @@ import java.util.Random;
 public class MiningDimensionSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig>
 {
     private static final Random rand = new Random();
+    private static final int zone1 = ConfigHolder.configInstance.zone1Y;
+    private static final int zone2 = ConfigHolder.configInstance.zone2Y;
+    private static final int zone3 = ConfigHolder.configInstance.zone3Y;
 
     public MiningDimensionSurfaceBuilder()
     {
@@ -44,11 +48,11 @@ public class MiningDimensionSurfaceBuilder extends SurfaceBuilder<TernarySurface
 
                 if (j1 < 255)
                 {
-                    material = Blocks.STONE.getDefaultState();
+                    material = getUndergroundStone(j1);
 
                     aboveState = chunk.getBlockState(new BlockPos(x1, j1 + 1, z1)).getBlock();
                     if (aboveState == Blocks.AIR)
-                        material = getUndergroundBlock();
+                        material = getRandomStoneVariant();
                 }
 
                 chunk.setBlockState(new BlockPos(x1, j1, z1), material, false);
@@ -65,7 +69,7 @@ public class MiningDimensionSurfaceBuilder extends SurfaceBuilder<TernarySurface
         }
     }
 
-    private static BlockState getUndergroundBlock()
+    private static BlockState getRandomStoneVariant()
     {
         int d = rand.nextInt(3);
         switch(d)
@@ -79,5 +83,13 @@ public class MiningDimensionSurfaceBuilder extends SurfaceBuilder<TernarySurface
         }
 
         return Blocks.STONE.getDefaultState();
+    }
+
+    private static BlockState getUndergroundStone(int yLevel)
+    {
+        if(yLevel < zone3) return com.github.draylar.miners_horizon.common.Blocks.COMPRESSED_STONE.getDefaultState();
+        else if (yLevel < zone2) return com.github.draylar.miners_horizon.common.Blocks.REINFORCED_STONE.getDefaultState();
+        else if (yLevel < zone1) return com.github.draylar.miners_horizon.common.Blocks.HARDENED_STONE.getDefaultState();
+        else return Blocks.STONE.getDefaultState();
     }
 }

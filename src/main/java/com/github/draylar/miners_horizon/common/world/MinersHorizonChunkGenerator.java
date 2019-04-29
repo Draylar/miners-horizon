@@ -45,22 +45,7 @@ public class MinersHorizonChunkGenerator extends SurfaceChunkGenerator<ChunkGene
                 double height = worldMidHeight + surfaceNoise.sample(posX * multiplier, posZ * multiplier, multiplier, multiplier * x);
                 for (int y = 0; y < height; y++)
                 {
-                    if (y < zone_3)
-                        chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.COMPRESSED_STONE.getDefaultState(), false);
-                    else if (y < zone_2)
-                        chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.REINFORCED_STONE.getDefaultState(), false);
-                    else if (y < zone_1)
-                        chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.HARDENED_STONE.getDefaultState(), false);
-                    else if (y < height - 1)
-                    {
-                        int rand = world.getRandom().nextInt(4);
-                        if (rand == 0 || rand == 1)
-                            chunk_1.setBlockState(new BlockPos(x, y, z), net.minecraft.block.Blocks.STONE.getDefaultState(), false);
-                        if (rand == 2)
-                            chunk_1.setBlockState(new BlockPos(x, y, z), net.minecraft.block.Blocks.COBBLESTONE.getDefaultState(), false);
-                        if (rand == 3)
-                            chunk_1.setBlockState(new BlockPos(x, y, z), net.minecraft.block.Blocks.ANDESITE.getDefaultState(), false);
-                    }
+                    chunk_1.setBlockState(new BlockPos(x, y, z), net.minecraft.block.Blocks.STONE.getDefaultState(), false);
                 }
 
                 // spawn in mountains
