@@ -1,6 +1,5 @@
 package com.github.draylar.miners_horizon.common.world.biome;
 
-import com.github.draylar.miners_horizon.config.ConfigHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -15,9 +14,6 @@ import java.util.Random;
 public class MiningDimensionSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig>
 {
     private static final Random rand = new Random();
-    private static final int zone1 = ConfigHolder.configInstance.zone1Y;
-    private static final int zone2 = ConfigHolder.configInstance.zone2Y;
-    private static final int zone3 = ConfigHolder.configInstance.zone3Y;
 
     public MiningDimensionSurfaceBuilder()
     {

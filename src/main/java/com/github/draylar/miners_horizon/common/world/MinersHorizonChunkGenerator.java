@@ -1,7 +1,8 @@
 package com.github.draylar.miners_horizon.common.world;
 
 import com.github.draylar.miners_horizon.MinersHorizon;
-import com.github.draylar.miners_horizon.config.ConfigHolder;
+import com.github.draylar.miners_horizon.config.MinersHorizonConfig;
+import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.noise.NoiseSampler;
@@ -18,10 +19,7 @@ public class MinersHorizonChunkGenerator extends SurfaceChunkGenerator<ChunkGene
 {
     // use a map to determine where peaks are, and a map to determine how tall they are
     private final NoiseSampler surfaceNoise;
-    private final int worldMidHeight = ConfigHolder.configInstance.worldMidHeight;
-    private final int zone_1 = ConfigHolder.configInstance.zone1Y;
-    private final int zone_2 = ConfigHolder.configInstance.zone2Y;
-    private final int zone_3 = ConfigHolder.configInstance.zone3Y;
+    private final int worldMidHeight = AutoConfig.getConfigHolder(MinersHorizonConfig.class).getConfig().worldMidHeight;
 
     public MinersHorizonChunkGenerator(IWorld world, BiomeSource biomeSource_1, ChunkGeneratorConfig config) {
         super(world, biomeSource_1, 4, 8, 256, config, true);
@@ -50,7 +48,7 @@ public class MinersHorizonChunkGenerator extends SurfaceChunkGenerator<ChunkGene
 
                 // spawn in mountains
                 double multiplier2 = 0.06;
-                double height2 = worldMidHeight - 3 + Math.pow(surfaceNoise.sample(posX * multiplier2, posZ * multiplier2, multiplier2, multiplier2 * x), ConfigHolder.configInstance.mountainHeight);
+                double height2 = worldMidHeight - 3 + Math.pow(surfaceNoise.sample(posX * multiplier2, posZ * multiplier2, multiplier2, multiplier2 * x), AutoConfig.getConfigHolder(MinersHorizonConfig.class).getConfig().mountainHeight);
 
                 if (height2 > 0)
                 {

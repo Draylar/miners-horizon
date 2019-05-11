@@ -1,8 +1,9 @@
 package com.github.draylar.miners_horizon.common.world.biome;
 
 import com.github.draylar.miners_horizon.MinersHorizon;
-import com.github.draylar.miners_horizon.config.ConfigHolder;
+import com.github.draylar.miners_horizon.config.MinersHorizonConfig;
 import com.github.draylar.miners_horizon.config.OreConfig;
+import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
@@ -34,11 +35,11 @@ public class MiningDimensionBiome extends Biome
 
         this.addCarver(GenerationStep.Carver.AIR, Biome.configureCarver(MinersHorizon.CAVE, new ProbabilityConfig(10)));
 
-        if(ConfigHolder.configInstance.enableMineshafts)
-            this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(ConfigHolder.configInstance.mineshaftRarity, MineshaftFeature.Type.MESA));
+        if(AutoConfig.getConfigHolder(MinersHorizonConfig.class).getConfig().enableMineshafts)
+            this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(AutoConfig.getConfigHolder(MinersHorizonConfig.class).getConfig().mineshaftRarity, MineshaftFeature.Type.MESA));
 
 
-        for(OreConfig oreConfig : ConfigHolder.configInstance.oreConfigList)
+        for(OreConfig oreConfig : AutoConfig.getConfigHolder(MinersHorizonConfig.class).getConfig().oreConfigList)
         {
             this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Biome.configureFeature(
                     MinersHorizon.CUSTOM_ORE_FEATURE,

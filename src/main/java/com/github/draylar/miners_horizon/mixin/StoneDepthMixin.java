@@ -1,7 +1,8 @@
 package com.github.draylar.miners_horizon.mixin;
 
 import com.github.draylar.miners_horizon.MinersHorizon;
-import com.github.draylar.miners_horizon.config.ConfigHolder;
+import com.github.draylar.miners_horizon.config.MinersHorizonConfig;
+import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -21,7 +22,7 @@ public class StoneDepthMixin
     {
         if(playerEntity.dimension == MinersHorizon.FABRIC_WORLD)
         {
-            int centerLine = ConfigHolder.configInstance.worldMidHeight;
+            int centerLine = AutoConfig.getConfigHolder(MinersHorizonConfig.class).getConfig().worldMidHeight;
             float depth = Math.max(0, centerLine - blockPos.getY());
 
             if (isUndergroundMaterial(blockState))
