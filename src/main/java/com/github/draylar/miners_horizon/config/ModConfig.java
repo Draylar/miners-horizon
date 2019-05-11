@@ -112,7 +112,6 @@ public class ModConfig
                         new OreConfig(new Identifier("minecraft:gold_ore"), 14, 4, config.zone3Y, 0, config.zone2Y),
                         new OreConfig(new Identifier("minecraft:redstone_ore"), 14, 8, config.zone3Y, 0, config.zone2Y),
                         new OreConfig(new Identifier("minecraft:lapis_ore"), 7, 4, config.zone3Y, 0, config.zone2Y),
-                        new OreConfig(new Identifier("minecraft:diamond_ore"), 6, 1, 0, 0, config.zone3Y),
 
                         // zone 3, more redstone & lapis with slightly higher diamond/emerald rate
                         new OreConfig(new Identifier("minecraft:coal_ore"), 9, 5, 0, 0, config.zone3Y),
