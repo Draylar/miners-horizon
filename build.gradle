@@ -1,33 +1,37 @@
 plugins {
-	id 'fabric-loom' version '0.2.0-SNAPSHOT'
+	id 'fabric-loom' version '0.2.1-SNAPSHOT'
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 archivesBaseName = "miners-horizon"
-version = "1.2.0"
+version = "1.3.0"
 
 minecraft {
 }
 
 repositories {
-	maven { url 'https://jitpack.io' }
-	maven {
-		name = "Abused's Maven"
-		url = "https://maven.abusedmaster.xyz"
-	}
+	maven { url = "https://maven.fabricmc.net/" }
+	maven { url = "https://minecraft.curseforge.com/api/maven" }
+	maven { url = 'http://maven.sargunv.s3-website-us-west-2.amazonaws.com/' }
 }
 
 dependencies {
 	minecraft "com.mojang:minecraft:1.14"
 	mappings "net.fabricmc:yarn:1.14+build.6"
 	modCompile "net.fabricmc:fabric-loader:0.4.6+build.141"
-	
-	// just to make sure mod ores properly spawn
-//	modCompile 'com.github.NerdHubMC:Refined-Machinery:e0d45091ac'
-//	modCompile "abused_master.abusedlib:AbusedLib:1.0.1"
-//	modCompile "com.github.NerdHubMC:Cardinal-Energy:1.0.0"
+
+	// cloth & autoconfig
+	modCompile "cloth-config:ClothConfig:0.2.1.14"
+	modCompile "me.sargunvohra.mcmods:auto-config:1.0.0+mc1.14"
+
+	// jij
+	include "cloth-config:ClothConfig:0.2.1.14"
+	include "me.sargunvohra.mcmods:auto-config:1.0.0+mc1.14"
+
+	// mod menu compat
+	modCompile "io.github.prospector.modmenu:ModMenu:1.4.0-72"
 	
 	//Fabric api
 	modCompile "net.fabricmc:fabric:0.2.7+build.127"

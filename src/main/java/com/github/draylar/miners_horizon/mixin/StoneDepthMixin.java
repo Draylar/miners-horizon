@@ -22,7 +22,7 @@ public class StoneDepthMixin
         if(playerEntity.dimension == MinersHorizon.FABRIC_WORLD)
         {
             int centerLine = ConfigHolder.configInstance.worldMidHeight;
-            float depth = Math.max(0, centerLine - blockPos.getY()) + 1;
+            float depth = Math.max(0, centerLine - blockPos.getY());
 
             if (isUndergroundMaterial(blockState))
             {
