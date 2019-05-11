@@ -1,7 +1,7 @@
 package com.github.draylar.miners_horizon.common;
 
 import com.github.draylar.miners_horizon.MinersHorizon;
-import com.github.draylar.miners_horizon.common.blocks.portal.MinerPortalBlock;
+import com.github.draylar.miners_horizon.common.blocks.MinerPortalBlock;
 import net.minecraft.block.Block;
 import net.minecraft.util.registry.Registry;
 
