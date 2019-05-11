@@ -27,8 +27,9 @@ public class StoneDepthMixin
                 // default is ~.19
                 int mid = AutoConfig.getConfigHolder(MinersHorizonConfig.class).getConfig().worldMidHeight;
                 float distanceFromMid = Math.max(0, mid - blockPos.getY());
-                float multiplier = Math.max(1, 1 - (distanceFromMid / mid) + .25f);
-                info.setReturnValue(info.getReturnValueF() * multiplier);
+                float multiplier = Math.min(1, 1 - (distanceFromMid / mid) + .025f);
+                System.out.println(info.getReturnValue() * multiplier);
+                info.setReturnValue(info.getReturnValue() * multiplier);
             }
         }
     }

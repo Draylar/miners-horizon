@@ -67,7 +67,7 @@ public class MiningDimensionSurfaceBuilder extends SurfaceBuilder<TernarySurface
 
     private static BlockState getRandomStoneVariant()
     {
-        int d = rand.nextInt(3);
+        int d = rand.nextInt(4);
         switch(d)
         {
             case 0:

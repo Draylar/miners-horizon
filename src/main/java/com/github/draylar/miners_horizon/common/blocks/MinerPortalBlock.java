@@ -2,16 +2,23 @@ package com.github.draylar.miners_horizon.common.blocks;
 
 import com.github.draylar.miners_horizon.MinersHorizon;
 import com.google.common.cache.LoadingCache;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.entity.Entity;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
+
+import java.util.Random;
 
 public class MinerPortalBlock extends PortalBlock
 {
@@ -63,6 +70,39 @@ public class MinerPortalBlock extends PortalBlock
 
         boolean boolean_1 = axis2 != axis && axis.isHorizontal();
         return !boolean_1 && blockState_2.getBlock() != this && !(new PortalSize(iWorld_1, pos, axis2)).method_10362() ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(blockState, direction, blockState_2, iWorld_1, pos, blockPos_2);
+    }
+
+    @Override
+    public void onScheduledTick(BlockState blockState_1, World world_1, BlockPos blockPos_1, Random random_1) {
+        // overriden to stop pigman from spawning
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    public void randomDisplayTick(BlockState blockState_1, World world_1, BlockPos blockPos_1, Random random_1) {
+        if (random_1.nextInt(100) == 0) {
+            world_1.playSound((double)blockPos_1.getX() + 0.5D, (double)blockPos_1.getY() + 0.5D, (double)blockPos_1.getZ() + 0.5D, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, random_1.nextFloat() * 0.4F + 0.8F, false);
+        }
+
+        for(int int_1 = 0; int_1 < 4; ++int_1) {
+            double double_1 = (double)((float)blockPos_1.getX() + random_1.nextFloat());
+            double double_2 = (double)((float)blockPos_1.getY() + random_1.nextFloat());
+            double double_3 = (double)((float)blockPos_1.getZ() + random_1.nextFloat());
+            double double_4 = ((double)random_1.nextFloat() - 0.5D) * 0.5D;
+            double double_5 = ((double)random_1.nextFloat() - 0.5D) * 0.5D;
+            double double_6 = ((double)random_1.nextFloat() - 0.5D) * 0.5D;
+            int int_2 = random_1.nextInt(2) * 2 - 1;
+            if (world_1.getBlockState(blockPos_1.west()).getBlock() != this && world_1.getBlockState(blockPos_1.east()).getBlock() != this) {
+                double_1 = (double)blockPos_1.getX() + 0.5D + 0.25D * (double)int_2;
+                double_4 = (double)(random_1.nextFloat() * 2.0F * (float)int_2);
+            } else {
+                double_3 = (double)blockPos_1.getZ() + 0.5D + 0.25D * (double)int_2;
+                double_6 = (double)(random_1.nextFloat() * 2.0F * (float)int_2);
+            }
+
+            world_1.addParticle(ParticleTypes.PORTAL, double_1, double_2, double_3, double_4, double_5, double_6);
+        }
+
     }
 
     @Override

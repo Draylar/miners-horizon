@@ -17,7 +17,7 @@ public class MinersHorizonConfig implements ConfigData
                     new OreConfig(
                             "minecraft:coal_ore",
                             15,
-                            20,
+                            30,
                             0,
                             10,
                             256
@@ -25,7 +25,7 @@ public class MinersHorizonConfig implements ConfigData
                     new OreConfig(
                             "minecraft:iron_ore",
                             15,
-                            30,
+                            35,
                             0,
                             0,
                             256
