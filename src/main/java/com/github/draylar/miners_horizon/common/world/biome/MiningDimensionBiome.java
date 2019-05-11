@@ -46,7 +46,7 @@ public class MiningDimensionBiome extends Biome
                     MinersHorizon.CUSTOM_ORE_FEATURE,
                     new OreFeatureConfig(
                             OreFeatureConfig.Target.NATURAL_STONE,
-                            Registry.BLOCK.get(new Identifier(oreConfig.blockIdentifier)).getDefaultState(),
+                            Registry.BLOCK.get(new Identifier(oreConfig.block)).getDefaultState(),
                             oreConfig.size),
                     Decorator.COUNT_RANGE,
                     new RangeDecoratorConfig(

@@ -2,7 +2,7 @@ package com.github.draylar.miners_horizon.config;
 
 public class OreConfig
 {
-    public final String blockIdentifier;
+    public final String block;
 
     public final int size;
 
@@ -11,9 +11,9 @@ public class OreConfig
     public final int topOffset;
     public final int maxY;
 
-    public OreConfig(String blockIdentifier, int size, int count, int bottomOffset, int topOffset, int maxY)
+    public OreConfig(String block, int size, int count, int bottomOffset, int topOffset, int maxY)
     {
-        this.blockIdentifier = blockIdentifier;
+        this.block = block;
         this.size = size;
         this.count = count;
         this.bottomOffset = bottomOffset;

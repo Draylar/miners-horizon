@@ -14,13 +14,60 @@ public class MinersHorizonConfig implements ConfigData
 
     public OreConfig[] oreConfigList  = new OreConfig[]
             {
-                new OreConfig(
-                        "minecraft:iron_ore",
-                        8,
-                        4,
-                        0,
-                        10,
-                        50
-                )
+                    new OreConfig(
+                            "minecraft:coal_ore",
+                            15,
+                            20,
+                            0,
+                            10,
+                            256
+                    ),
+                    new OreConfig(
+                            "minecraft:iron_ore",
+                            15,
+                            20,
+                            0,
+                            0,
+                            256
+                    ),
+                    new OreConfig(
+                            "minecraft:lapis_ore",
+                            8,
+                            10,
+                            0,
+                            0,
+                            75
+                    ),
+                    new OreConfig(
+                            "minecrat:gold_ore",
+                            8,
+                            10,
+                            0,
+                            0,
+                            50
+                    ),
+                    new OreConfig(
+                            "minecraft:redstone_ore",
+                            8,
+                            10,
+                            0,
+                            0,
+                            75
+                    ),
+                    new OreConfig(
+                            "minecraft:diamond_ore",
+                            8,
+                            2,
+                            0,
+                            0,
+                            35),
+                    new OreConfig(
+                            "minecraft:emerald_ore",
+                            8,
+                            2,
+                            0,
+                            0,
+                            35
+                    )
             };
 }
