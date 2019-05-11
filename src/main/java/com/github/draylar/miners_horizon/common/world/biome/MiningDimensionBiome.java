@@ -41,7 +41,7 @@ public class MiningDimensionBiome extends Biome
         for(OreConfig oreConfig : ConfigHolder.configInstance.oreConfigList)
         {
             this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Biome.configureFeature(
-                    Feature.ORE,
+                    MinersHorizon.CUSTOM_ORE_FEATURE,
                     new OreFeatureConfig(
                             OreFeatureConfig.Target.NATURAL_STONE,
                             Registry.BLOCK.get(oreConfig.blockIdentifier).getDefaultState(),

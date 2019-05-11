@@ -8,6 +8,7 @@ import com.github.draylar.miners_horizon.common.world.biome.MiningCaveCarver;
 import com.github.draylar.miners_horizon.common.world.biome.MiningDimensionBiome;
 import com.github.draylar.miners_horizon.common.world.biome.MiningDimensionSurfaceBuilder;
 import com.github.draylar.miners_horizon.common.world.dims.FabricDimensionType;
+import com.github.draylar.miners_horizon.common.world.feature.CustomOreFeature;
 import com.github.draylar.miners_horizon.config.ModConfig;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
@@ -18,6 +19,8 @@ import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.carver.Carver;
 import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.ChunkGeneratorType;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
@@ -32,7 +35,9 @@ public class MinersHorizon implements ModInitializer
 	public static ChunkGeneratorType FABRIC_CHUNK_GENERATOR = new ChunkGeneratorTypeWorkaround().getChunkGeneratorType(ChunkGeneratorConfig::new);
 	public static SurfaceBuilder<TernarySurfaceConfig> MINING_BIOME_SURFACE = Registry.register(Registry.SURFACE_BUILDER, getModIdentifier("mining_surface"), new MiningDimensionSurfaceBuilder());
 	public static final Carver<ProbabilityConfig> CAVE = Registry.register(Registry.CARVER, getModIdentifier("mining_carver"), new MiningCaveCarver(256));
+	public static Feature CUSTOM_ORE_FEATURE = Registry.register(Registry.FEATURE, getModIdentifier("ore"), new CustomOreFeature(OreFeatureConfig::deserialize));
 	public static Biome MINING_BIOME = Registry.register(Registry.BIOME, getModIdentifier("mining_biome"), new MiningDimensionBiome());
+
 
 	@Override
 	public void onInitialize()
