@@ -11,16 +11,17 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Item.class)
-public abstract class MixinUsePickaxe
+public class MixinUsePickaxe
 {
     @Inject(at = @At("HEAD"), method = "useOnBlock")
-    public void useOnBlock(ItemUsageContext itemUsageContext_1, CallbackInfoReturnable<ActionResult> cir)
+    private void useOnBlock(ItemUsageContext usageContext, CallbackInfoReturnable<ActionResult> info)
     {
-        if(((Item) (Object) this) instanceof PickaxeItem)
+        Item item = (Item) (Object) this;
+        if(item instanceof PickaxeItem)
         {
-            if(itemUsageContext_1.getWorld().getBlockState(itemUsageContext_1.getBlockPos()).getBlock() == net.minecraft.block.Blocks.CHISELED_STONE_BRICKS)
+            if(usageContext.getWorld().getBlockState(usageContext.getBlockPos()).getBlock() == net.minecraft.block.Blocks.CHISELED_STONE_BRICKS)
             {
-                Blocks.MINER_PORTAL.method_10352(itemUsageContext_1.getWorld(), itemUsageContext_1.getBlockPos().up());
+                Blocks.MINER_PORTAL.method_10352(usageContext.getWorld(), usageContext.getBlockPos().up());
             }
         }
     }
