@@ -36,7 +36,7 @@ public class MinersHorizon implements ModInitializer
 	public static SurfaceBuilder<TernarySurfaceConfig> MINING_BIOME_SURFACE = Registry.register(Registry.SURFACE_BUILDER, getModIdentifier("mining_surface"), new MiningDimensionSurfaceBuilder());
 	public static final Carver<ProbabilityConfig> CAVE = Registry.register(Registry.CARVER, getModIdentifier("mining_carver"), new MiningCaveCarver(256));
 	public static Feature CUSTOM_ORE_FEATURE = Registry.register(Registry.FEATURE, getModIdentifier("ore"), new CustomOreFeature(OreFeatureConfig::deserialize));
-	public static Biome MINING_BIOME = Registry.register(Registry.BIOME, getModIdentifier("mining_biome"), new MiningDimensionBiome());
+	public static Biome MINING_BIOME;
 
 
 	@Override
@@ -44,6 +44,8 @@ public class MinersHorizon implements ModInitializer
 	{
 		Blocks.register();
 		Items.register();
+
+		MINING_BIOME = Registry.register(Registry.BIOME, getModIdentifier("mining_biome"), new MiningDimensionBiome());
 	}
 
 	public static Identifier getModIdentifier(String path)
