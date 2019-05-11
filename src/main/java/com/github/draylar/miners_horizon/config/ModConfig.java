@@ -120,8 +120,8 @@ public class ModConfig
                         new OreConfig(new Identifier("minecraft:gold_ore"), 14, 4, 0, 0, config.zone3Y),
                         new OreConfig(new Identifier("minecraft:redstone_ore"), 14, 8, 0, 0, config.zone3Y),
                         new OreConfig(new Identifier("minecraft:lapis_ore"), 7, 3, 0, 0, config.zone3Y),
-                        new OreConfig(new Identifier("minecraft:emerald_ore"), 8, 4, 0, 0, config.zone3Y),
-                        new OreConfig(new Identifier("minecraft:diamond_ore"), 8, 4, 0, 0, config.zone3Y)
+                        new OreConfig(new Identifier("minecraft:emerald_ore"), 8, 2, 0, 0, config.zone3Y),
+                        new OreConfig(new Identifier("minecraft:diamond_ore"), 8, 2, 0, 0, config.zone3Y)
                 };
 
 
