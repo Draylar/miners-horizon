@@ -85,7 +85,8 @@ public class TeleportPlacementHandler
         BlockPos spawnLocation = getBedLocation((PlayerEntity) entity, newWorld);
 
         if (spawnLocation == null) {
-            spawnLocation = newWorld.getSpawnPos();
+            // if you're reading this and wondering why it changed... oh boy :)
+            spawnLocation = new BlockPos(0, 100, 0);
         }
 
         // find closest portal block in a 4 chunk radius
