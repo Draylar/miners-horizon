@@ -1,7 +1,7 @@
 package com.github.draylar.miners_horizon.mixin;
 
 import com.github.draylar.miners_horizon.MinersHorizon;
-import com.github.draylar.miners_horizon.common.world.TeleportPlacementHandler;
+import com.github.draylar.miners_horizon.common.util.TeleportPlacementHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.PortalForcer;

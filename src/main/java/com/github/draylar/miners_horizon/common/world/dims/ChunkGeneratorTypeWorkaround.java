@@ -1,4 +1,4 @@
-package com.github.draylar.miners_horizon.common.world;
+package com.github.draylar.miners_horizon.common.world.dims;
 
 import net.minecraft.world.World;
 import net.minecraft.world.biome.source.BiomeSource;

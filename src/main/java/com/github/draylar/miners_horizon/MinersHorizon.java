@@ -1,9 +1,8 @@
 package com.github.draylar.miners_horizon;
 
 import com.github.draylar.miners_horizon.common.Blocks;
-import com.github.draylar.miners_horizon.common.Items;
-import com.github.draylar.miners_horizon.common.world.ChunkGeneratorTypeWorkaround;
-import com.github.draylar.miners_horizon.common.world.MinersHorizonDimension;
+import com.github.draylar.miners_horizon.common.world.dims.ChunkGeneratorTypeWorkaround;
+import com.github.draylar.miners_horizon.common.world.dims.MinersHorizonDimension;
 import com.github.draylar.miners_horizon.common.world.biome.MiningCaveCarver;
 import com.github.draylar.miners_horizon.common.world.biome.MiningDimensionBiome;
 import com.github.draylar.miners_horizon.common.world.biome.MiningDimensionSurfaceBuilder;
@@ -28,11 +27,11 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
 public class MinersHorizon implements ModInitializer
 {
-	public static DimensionType FABRIC_WORLD = new FabricDimensionType(getModIdentifier("miners_horizon"), 5, MinersHorizonDimension::new);
-	public static ChunkGeneratorType FABRIC_CHUNK_GENERATOR = new ChunkGeneratorTypeWorkaround().getChunkGeneratorType(ChunkGeneratorConfig::new);
-	public static SurfaceBuilder<TernarySurfaceConfig> MINING_BIOME_SURFACE = Registry.register(Registry.SURFACE_BUILDER, getModIdentifier("mining_surface"), new MiningDimensionSurfaceBuilder());
+	public static final DimensionType FABRIC_WORLD = new FabricDimensionType(getModIdentifier("miners_horizon"), 5, MinersHorizonDimension::new);
+	public static final ChunkGeneratorType FABRIC_CHUNK_GENERATOR = new ChunkGeneratorTypeWorkaround().getChunkGeneratorType(ChunkGeneratorConfig::new);
+	public static final SurfaceBuilder<TernarySurfaceConfig> MINING_BIOME_SURFACE = Registry.register(Registry.SURFACE_BUILDER, getModIdentifier("mining_surface"), new MiningDimensionSurfaceBuilder());
 	public static final Carver<ProbabilityConfig> CAVE = Registry.register(Registry.CARVER, getModIdentifier("mining_carver"), new MiningCaveCarver(256));
-	public static Feature CUSTOM_ORE_FEATURE = Registry.register(Registry.FEATURE, getModIdentifier("ore"), new CustomOreFeature(OreFeatureConfig::deserialize));
+	public static final Feature CUSTOM_ORE_FEATURE = Registry.register(Registry.FEATURE, getModIdentifier("ore"), new CustomOreFeature(OreFeatureConfig::deserialize));
 	public static Biome MINING_BIOME;
 
 
@@ -40,7 +39,6 @@ public class MinersHorizon implements ModInitializer
 	public void onInitialize()
 	{
 		Blocks.register();
-		Items.register();
 
 		AutoConfig.register(MinersHorizonConfig.class, JanksonConfigSerializer::new);
 
