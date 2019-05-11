@@ -98,8 +98,8 @@ public class ModConfig
         config.oreConfigList = new OreConfig[]
                 {
                         // default, same density and size as vanilla
-                        new OreConfig(new Identifier("minecraft:coal_ore"), 17, 20, 100, 0, 256),
-                        new OreConfig(new Identifier("minecraft:iron_ore"), 13, 20, 100, 0, 256),
+                        new OreConfig(new Identifier("minecraft:coal_ore"), 17, 17, 100, 0, 256),
+                        new OreConfig(new Identifier("minecraft:iron_ore"), 13, 17, 100, 0, 256),
 
                         // zone 1, larger coal & iron with vanilla gold rate
                         new OreConfig(new Identifier("minecraft:coal_ore"), 17, 10, config.zone2Y, 0, config.zone1Y),
@@ -108,7 +108,7 @@ public class ModConfig
 
                         // zone 2, more coal/iron/gold with default redstone & lapis
                         new OreConfig(new Identifier("minecraft:coal_ore"), 13, 10, config.zone3Y, 0, config.zone2Y),
-                        new OreConfig(new Identifier("minecraft:iron_ore"), 13, 15, config.zone3Y, 0, config.zone2Y),
+                        new OreConfig(new Identifier("minecraft:iron_ore"), 13, 13, config.zone3Y, 0, config.zone2Y),
                         new OreConfig(new Identifier("minecraft:gold_ore"), 14, 4, config.zone3Y, 0, config.zone2Y),
                         new OreConfig(new Identifier("minecraft:redstone_ore"), 14, 8, config.zone3Y, 0, config.zone2Y),
                         new OreConfig(new Identifier("minecraft:lapis_ore"), 7, 4, config.zone3Y, 0, config.zone2Y),
@@ -117,7 +117,7 @@ public class ModConfig
                         // zone 3, more redstone & lapis with slightly higher diamond/emerald rate
                         new OreConfig(new Identifier("minecraft:coal_ore"), 9, 5, 0, 0, config.zone3Y),
                         new OreConfig(new Identifier("minecraft:iron_ore"), 13, 10, 0, 0, config.zone3Y),
-                        new OreConfig(new Identifier("minecraft:gold_ore"), 14, 4, 0, 0, config.zone3Y),
+                        new OreConfig(new Identifier("minecraft:gold_ore"), 14, 3, 0, 0, config.zone3Y),
                         new OreConfig(new Identifier("minecraft:redstone_ore"), 14, 8, 0, 0, config.zone3Y),
                         new OreConfig(new Identifier("minecraft:lapis_ore"), 7, 3, 0, 0, config.zone3Y),
                         new OreConfig(new Identifier("minecraft:emerald_ore"), 8, 2, 0, 0, config.zone3Y),

@@ -100,7 +100,7 @@ public class TeleportPlacementHandler
                     if(newWorld.getBlockState(pos).getBlock() == Blocks.MINER_PORTAL)
                     {
                         entity.setSneaking(false);
-                        entity.setPositionAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+                        entity.setPositionAndAngles(pos.getX() + .5, pos.getY() + .5, pos.getZ() + .5, 0, 0);
                         return;
                     }
                 }
