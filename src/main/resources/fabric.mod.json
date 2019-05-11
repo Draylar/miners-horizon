@@ -20,7 +20,7 @@
   },
 
   "mixins": [
-    "modid.minershorizon.json"
+    "minershorizon.common.json"
   ],
 
   "requires": {
