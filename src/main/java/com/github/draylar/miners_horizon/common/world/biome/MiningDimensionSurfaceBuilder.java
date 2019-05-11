@@ -48,7 +48,7 @@ public class MiningDimensionSurfaceBuilder extends SurfaceBuilder<TernarySurface
 
                 if (j1 < 255)
                 {
-                    material = getUndergroundStone(j1);
+                    material = getUndergroundStone();
 
                     aboveState = chunk.getBlockState(new BlockPos(x1, j1 + 1, z1)).getBlock();
                     if (aboveState == Blocks.AIR)
@@ -85,7 +85,7 @@ public class MiningDimensionSurfaceBuilder extends SurfaceBuilder<TernarySurface
         return Blocks.STONE.getDefaultState();
     }
 
-    private static BlockState getUndergroundStone(int yLevel)
+    private static BlockState getUndergroundStone()
     {
         return Blocks.STONE.getDefaultState();
     }

@@ -1,5 +1,6 @@
 package com.github.draylar.miners_horizon.mixin;
 
+import com.github.draylar.miners_horizon.config.ConfigHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -17,9 +18,12 @@ public class StoneDepthMixin
     @Inject(at = @At("RETURN"), method = "calcBlockBreakingDelta", cancellable = true)
     private void onBlockBreakDelta(BlockState blockState, PlayerEntity playerEntity, BlockView blockView, BlockPos blockPos, CallbackInfoReturnable<Float> info)
     {
+        int centerLine = ConfigHolder.configInstance.worldMidHeight;
+        int depth = Math.max(0, centerLine - blockPos.getY()) + 1;
+
         if(isUndergroundMaterial(blockState))
         {
-            info.setReturnValue(info.getReturnValue() * 0.05f);
+            info.setReturnValue(info.getReturnValue() * 0.99f * depth);
         }
     }
 

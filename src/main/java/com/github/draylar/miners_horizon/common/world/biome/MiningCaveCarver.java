@@ -5,6 +5,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.carver.CaveCarver;
 
+/**
+ * Used so we're able to carve out cobblestone with caves.
+ */
 public class MiningCaveCarver extends CaveCarver
 {
     public MiningCaveCarver(int int_1)
