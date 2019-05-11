@@ -20,16 +20,19 @@ public class MixinPortalForcer
     private ServerWorld world;
 
     @Inject(method = "usePortal", at = @At("HEAD"), cancellable = true)
-    public void method_8653(Entity entity, float float_1, CallbackInfoReturnable<Boolean> infoReturnable) {
-        //If going to the void world
-        if(world.getDimension().getType() == MinersHorizon.FABRIC_WORLD){
+    private void usePortal(Entity entity, float float_1, CallbackInfoReturnable<Boolean> infoReturnable)
+    {
+        // going to the void world
+        if (world.getDimension().getType() == MinersHorizon.FABRIC_WORLD)
+        {
             TeleportPlacementHandler.enterDimension(entity, (ServerWorld) entity.getEntityWorld(), world);
             infoReturnable.setReturnValue(true);
             infoReturnable.cancel();
         }
 
-        //Coming from the void world
-        if(entity.getEntityWorld().getDimension().getType() == MinersHorizon.FABRIC_WORLD){
+        // coming from the void world
+        if (entity.getEntityWorld().getDimension().getType() == MinersHorizon.FABRIC_WORLD)
+        {
             TeleportPlacementHandler.leaveDimension(entity, (ServerWorld) entity.getEntityWorld(), world);
             infoReturnable.setReturnValue(true);
             infoReturnable.cancel();
