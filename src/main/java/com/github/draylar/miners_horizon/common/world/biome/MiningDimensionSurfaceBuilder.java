@@ -87,9 +87,6 @@ public class MiningDimensionSurfaceBuilder extends SurfaceBuilder<TernarySurface
 
     private static BlockState getUndergroundStone(int yLevel)
     {
-        if(yLevel < zone3) return com.github.draylar.miners_horizon.common.Blocks.COMPRESSED_STONE.getDefaultState();
-        else if (yLevel < zone2) return com.github.draylar.miners_horizon.common.Blocks.REINFORCED_STONE.getDefaultState();
-        else if (yLevel < zone1) return com.github.draylar.miners_horizon.common.Blocks.HARDENED_STONE.getDefaultState();
-        else return Blocks.STONE.getDefaultState();
+        return Blocks.STONE.getDefaultState();
     }
 }

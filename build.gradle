@@ -12,7 +12,7 @@ minecraft {
 }
 
 repositories {
-	
+	maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -20,6 +20,9 @@ dependencies {
 	mappings "net.fabricmc:yarn:1.14+build.6"
 	modCompile "net.fabricmc:fabric-loader:0.4.6+build.141"
 
+	apply from: "https://raw.githubusercontent.com/NerdHubMC/Gradle-Scripts/master/scripts/fabric/dependencies/1.14/development_suite.gradle"
+	// modCompile 'com.github.NerdHubMC:Refined-Machinery:e0d45091ac'
+	
 	//Fabric api
 	modCompile "net.fabricmc:fabric:0.2.7+build.127"
 }

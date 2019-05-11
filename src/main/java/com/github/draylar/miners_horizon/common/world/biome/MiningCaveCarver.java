@@ -13,9 +13,6 @@ public class MiningCaveCarver extends CaveCarver
         this.alwaysCarvableBlocks = ImmutableSet.of(
                 Blocks.STONE,
                 Blocks.COBBLESTONE,
-                com.github.draylar.miners_horizon.common.Blocks.COMPRESSED_STONE,
-                com.github.draylar.miners_horizon.common.Blocks.HARDENED_STONE,
-                com.github.draylar.miners_horizon.common.Blocks.REINFORCED_STONE,
                 Blocks.GRANITE,
                 Blocks.DIORITE,
                 Blocks.ANDESITE,

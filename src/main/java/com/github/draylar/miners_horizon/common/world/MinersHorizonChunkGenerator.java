@@ -1,8 +1,8 @@
 package com.github.draylar.miners_horizon.common.world;
 
 import com.github.draylar.miners_horizon.MinersHorizon;
-import com.github.draylar.miners_horizon.common.Blocks;
 import com.github.draylar.miners_horizon.config.ConfigHolder;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.noise.NoiseSampler;
 import net.minecraft.util.math.noise.OctaveSimplexNoiseSampler;
@@ -65,7 +65,7 @@ public class MinersHorizonChunkGenerator extends SurfaceChunkGenerator<ChunkGene
                     }
                 }
 
-                MinersHorizon.MINING_BIOME.buildSurface(new Random(234612362L * posX + -8264616432452L * posZ), chunk_1, posX, posZ, 255, surfaceNoise.sample(posX, posZ, 1, 1), Blocks.COMPRESSED_STONE.getDefaultState(), net.minecraft.block.Blocks.WATER.getDefaultState(), getSeaLevel(), world.getSeed());
+                MinersHorizon.MINING_BIOME.buildSurface(new Random(234612362L * posX + -8264616432452L * posZ), chunk_1, posX, posZ, 255, surfaceNoise.sample(posX, posZ, 1, 1), Blocks.STONE.getDefaultState(), net.minecraft.block.Blocks.WATER.getDefaultState(), getSeaLevel(), world.getSeed());
             }
         }
 

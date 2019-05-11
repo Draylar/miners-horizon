@@ -5,7 +5,7 @@
   "mixins": [
     "MixinPortalForcer",
     "MixinUsePickaxe",
-    "NaturalStoneMixin"
+    "StoneDepthMixin"
   ],
   "injectors": {
     "defaultRequire": 1
