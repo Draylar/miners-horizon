@@ -22,18 +22,13 @@ public class StoneDepthMixin
     {
         if(playerEntity.dimension == MinersHorizon.FABRIC_WORLD)
         {
-            int centerLine = AutoConfig.getConfigHolder(MinersHorizonConfig.class).getConfig().worldMidHeight;
-            float depth = Math.max(0, centerLine - blockPos.getY());
-
             if (isUndergroundMaterial(blockState))
             {
-                // from 1 at depth = 0 to .025 at 0
-                float start = info.getReturnValue();
-                float multiplier = depth / centerLine;
-                multiplier = (float) Math.max(1f, multiplier + .25);
-                float totalPenalty = 1 - (1 * multiplier);
-
-                info.setReturnValue(Math.max(.025f, start * totalPenalty));
+                // default is ~.19
+                int mid = AutoConfig.getConfigHolder(MinersHorizonConfig.class).getConfig().worldMidHeight;
+                float distanceFromMid = Math.max(0, mid - blockPos.getY());
+                float multiplier = Math.max(1, 1 - (distanceFromMid / mid) + .25f);
+                info.setReturnValue(info.getReturnValueF() * multiplier);
             }
         }
     }
