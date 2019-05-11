@@ -14,6 +14,13 @@ public class MinersHorizonConfig implements ConfigData
 
     public OreConfig[] oreConfigList  = new OreConfig[]
             {
-
+                new OreConfig(
+                        "minecraft:iron_ore",
+                        8,
+                        4,
+                        0,
+                        10,
+                        50
+                )
             };
 }

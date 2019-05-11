@@ -6,6 +6,7 @@ import com.github.draylar.miners_horizon.config.OreConfig;
 import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -45,7 +46,7 @@ public class MiningDimensionBiome extends Biome
                     MinersHorizon.CUSTOM_ORE_FEATURE,
                     new OreFeatureConfig(
                             OreFeatureConfig.Target.NATURAL_STONE,
-                            Registry.BLOCK.get(oreConfig.blockIdentifier).getDefaultState(),
+                            Registry.BLOCK.get(new Identifier(oreConfig.blockIdentifier)).getDefaultState(),
                             oreConfig.size),
                     Decorator.COUNT_RANGE,
                     new RangeDecoratorConfig(

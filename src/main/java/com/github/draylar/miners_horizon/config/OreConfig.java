@@ -1,10 +1,8 @@
 package com.github.draylar.miners_horizon.config;
 
-import net.minecraft.util.Identifier;
-
 public class OreConfig
 {
-    public final Identifier blockIdentifier;
+    public final String blockIdentifier;
 
     public final int size;
 
@@ -13,7 +11,7 @@ public class OreConfig
     public final int topOffset;
     public final int maxY;
 
-    public OreConfig(Identifier blockIdentifier, int size, int count, int bottomOffset, int topOffset, int maxY)
+    public OreConfig(String blockIdentifier, int size, int count, int bottomOffset, int topOffset, int maxY)
     {
         this.blockIdentifier = blockIdentifier;
         this.size = size;
