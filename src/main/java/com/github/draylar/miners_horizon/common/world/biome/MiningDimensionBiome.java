@@ -40,7 +40,8 @@ public class MiningDimensionBiome extends Biome
             this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(AutoConfig.getConfigHolder(MinersHorizonConfig.class).getConfig().mineshaftRarity, MineshaftFeature.Type.MESA));
 
 
-        for(OreConfig oreConfig : AutoConfig.getConfigHolder(MinersHorizonConfig.class).getConfig().oreConfigList)
+        MinersHorizonConfig config = AutoConfig.getConfigHolder(MinersHorizonConfig.class).getConfig();
+        for(OreConfig oreConfig : config.oreConfigList)
         {
             this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Biome.configureFeature(
                     MinersHorizon.CUSTOM_ORE_FEATURE,

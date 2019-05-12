@@ -1,16 +1,16 @@
 package com.github.draylar.miners_horizon;
 
 import com.github.draylar.miners_horizon.common.Blocks;
-import com.github.draylar.miners_horizon.common.world.dims.ChunkGeneratorTypeWorkaround;
-import com.github.draylar.miners_horizon.common.world.dims.MinersHorizonDimension;
 import com.github.draylar.miners_horizon.common.world.biome.MiningCaveCarver;
 import com.github.draylar.miners_horizon.common.world.biome.MiningDimensionBiome;
 import com.github.draylar.miners_horizon.common.world.biome.MiningDimensionSurfaceBuilder;
+import com.github.draylar.miners_horizon.common.world.dims.ChunkGeneratorTypeWorkaround;
 import com.github.draylar.miners_horizon.common.world.dims.FabricDimensionType;
+import com.github.draylar.miners_horizon.common.world.dims.MinersHorizonDimension;
 import com.github.draylar.miners_horizon.common.world.feature.CustomOreFeature;
 import com.github.draylar.miners_horizon.config.MinersHorizonConfig;
 import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
-import me.sargunvohra.mcmods.autoconfig1.serializer.JanksonConfigSerializer;
+import me.sargunvohra.mcmods.autoconfig1.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -40,7 +40,7 @@ public class MinersHorizon implements ModInitializer
 	{
 		Blocks.register();
 
-		AutoConfig.register(MinersHorizonConfig.class, JanksonConfigSerializer::new);
+		AutoConfig.register(MinersHorizonConfig.class, GsonConfigSerializer::new);
 
 		MINING_BIOME = Registry.register(Registry.BIOME, getModIdentifier("mining_biome"), new MiningDimensionBiome());
 	}
