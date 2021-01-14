@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.github.draylar.miners_horizon.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "environment": "client",
+  "client": [
+    "StoneHueMixin",
+    "LateClientInit"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

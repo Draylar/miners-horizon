@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.github.draylar.miners_horizon.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "environment": "common",
+  "mixins": [
+    "MixinUsePickaxe",
+    "StoneDepthMixin",
+    "LateServerInit",
+    "RawIdFixer"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

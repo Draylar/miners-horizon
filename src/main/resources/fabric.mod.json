@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "miners_horizon",
+  "version": "1.5.0",
+
+  "name": "Miner's Horizon",
+  "description": "Adds in a dimension specifically for mining.",
+  "authors": [
+    "Draylar"
+  ],
+
+  "license": "GPLv3",
+  "icon": "assets/miners_horizon/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.github.draylar.miners_horizon.MinersHorizon"
+    ],
+    "client": [
+      "com.github.draylar.miners_horizon.MinersHorizonClient"
+    ]
+  },
+
+  "mixins": [
+    "minershorizon.common.json",
+    "minershorizon.client.json"
+  ],
+
+  "requires": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  }
+}
