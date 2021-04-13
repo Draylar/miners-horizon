@@ -7,7 +7,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 archivesBaseName = "miners-horizon"
-version = "1.5.0"
+version = project.mod_version + "-" + project.minecraft_version
 
 minecraft {
 	accessWidener = file("src/main/resources/minershorizon.accesswidener")
