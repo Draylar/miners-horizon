@@ -77,6 +77,7 @@ public class HorizonPortalBlock extends NetherPortalBlock {
                     target = ((ServerWorld) world).getServer().getWorld(World.OVERWORLD);
                 } else {
                     target = ((ServerWorld) world).getServer().getWorld(HorizonWorld.MINERS_HORIZON);
+                    pos = new BlockPos(pos.getX(), 200, pos.getZ());
                 }
 
                 HorizonPortalForcer portalForcer = new HorizonPortalForcer(target);
