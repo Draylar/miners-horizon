@@ -6,7 +6,6 @@ import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 
 @Config(name = "minershorizon")
 public class MinersHorizonConfig implements ConfigData {
-    public String portalBlockId = "minecraft:chiseled_stone_bricks";
 
     public int zone1Start = 100;
     public int zone2Start = 60;
