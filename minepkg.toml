@@ -9,7 +9,7 @@ manifestVersion = 0
   license = "MIT"
 
 [requirements]
-  minecraft = ""
+  minecraft = "*"
   fabric = "*"
 
 [dependencies]
