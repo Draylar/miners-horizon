@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Miner's Horizon",
-  "description": "Adds in a dimension specifically for mining.",
+  "description": "When you look out into the sky after a day of mining... the horizon looks back. A modern mining dimension mod for Fabric!",
   "authors": [
     "Draylar"
   ],
