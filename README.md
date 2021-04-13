@@ -1,8 +1,12 @@
 # Miner's Horizon
 
-Miner's Horizon: a mining dimension mod.
-https://www.curseforge.com/minecraft/mc-mods/miners-horizon
+![](https://i.imgur.com/VHhSuBr.png)
+
+Miner's Horizon is a modern mining dimension mod built for Fabric. It has terrain specifically designed for mining & quarrying, which avoiding the generic super flat design of previous mining dimensions. The default floor is composed of a mixture of stone, which is accented by peaks of grass to add a bit of color to your landscape.
+
+![](https://i.imgur.com/oaIzm6j.png)
+
+As you progress deeper into the Miner's Horizon, the raw underground materials you find will be more compressed. This leads to them being more difficult to break, but much more plentiful in numbers.
 
 # License
-GPLv3. You are free to use, sell, or copy my code in any way you wish. 
-If you agree to this license, you also agree to license your project (using my code) as GPLv3 and keep it open source.
+Miner's Horizon is licensed under MIT.
