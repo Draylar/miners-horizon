@@ -1,23 +1,22 @@
 package draylar.horizon.config;
 
 
-import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
-import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
+import draylar.omegaconfig.api.Config;
+import draylar.omegaconfig.api.Syncing;
 
-@Config(name = "minershorizon")
-public class MinersHorizonConfig implements ConfigData {
+public class MinersHorizonConfig implements Config {
 
-    public int zone1Start = 100;
-    public int zone2Start = 60;
-    public int zone3Start = 30;
+    @Syncing public int zone1Start = 100;
+    @Syncing public int zone2Start = 60;
+    @Syncing public int zone3Start = 30;
 
-    public int zone1HardnessModifier = 3;
-    public int zone2HardnessModifier = 6;
-    public int zone3HardnessModifier = 10;
+    @Syncing public int zone1HardnessModifier = 3;
+    @Syncing public int zone2HardnessModifier = 6;
+    @Syncing public int zone3HardnessModifier = 10;
 
-    public int zone1StoneDarkness = 40;
-    public int zone2StoneDarkness = 60;
-    public int zone3StoneDarkness = 80;
+    @Syncing public int zone1StoneDarkness = 40;
+    @Syncing public int zone2StoneDarkness = 60;
+    @Syncing public int zone3StoneDarkness = 80;
 
     public int worldMidHeight = 200;
     public boolean enableMineshafts = true;
@@ -59,4 +58,9 @@ public class MinersHorizonConfig implements ConfigData {
                     new OreConfig("minecraft:diamond_ore", 8, 4, 30),
                     new OreConfig("minecraft:emerald_ore", 8, 4, 30),
             };
+
+    @Override
+    public String getName() {
+        return "minershorizon";
+    }
 }

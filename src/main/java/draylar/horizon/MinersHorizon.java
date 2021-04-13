@@ -5,8 +5,7 @@ import draylar.horizon.registry.HorizonBiomes;
 import draylar.horizon.registry.HorizonBlocks;
 import draylar.horizon.registry.HorizonWorld;
 import draylar.horizon.util.HorizonPortalHelper;
-import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
-import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
+import draylar.omegaconfig.OmegaConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
@@ -21,7 +20,7 @@ import java.util.Optional;
 
 public class MinersHorizon implements ModInitializer {
 
-    public static final MinersHorizonConfig CONFIG = AutoConfig.register(MinersHorizonConfig.class, GsonConfigSerializer::new).getConfig();
+    public static final MinersHorizonConfig CONFIG = OmegaConfig.register(MinersHorizonConfig.class);
     public static final PointOfInterestType HORIZON_PORTAL = PointOfInterestHelper.register(id("horizon_portal"), 0, 1, HorizonBlocks.HORIZON_PORTAL);
 
     @Override
