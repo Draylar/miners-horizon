@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "draylar.horizon.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "StoneDepthMixin"
+  ],
+  "client": [
+    "StoneHueMixin",
+    "SkyPropertiesMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

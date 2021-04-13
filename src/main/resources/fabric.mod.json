@@ -9,26 +9,27 @@
     "Draylar"
   ],
 
-  "license": "GPLv3",
-  "icon": "assets/miners_horizon/icon.png",
+  "license": "MIT",
+  "icon": "assets/minershorizon/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.draylar.miners_horizon.MinersHorizon"
+      "draylar.horizon.MinersHorizon"
     ],
     "client": [
-      "com.github.draylar.miners_horizon.MinersHorizonClient"
+      "draylar.horizon.MinersHorizonClient"
     ]
   },
 
   "mixins": [
-    "minershorizon.common.json",
-    "minershorizon.client.json"
+    "minershorizon.mixins.json"
   ],
 
   "requires": {
     "fabricloader": ">=0.4.0",
     "fabric": "*"
-  }
+  },
+
+  "accessWidener": "minershorizon.accesswidener"
 }

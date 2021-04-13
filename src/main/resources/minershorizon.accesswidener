@@ -1,0 +1,9 @@
+accessWidener	v1	named
+
+extendable class net/minecraft/world/gen/chunk/NoiseChunkGenerator
+accessible field net/minecraft/world/gen/chunk/NoiseChunkGenerator horizontalNoiseResolution I
+accessible field net/minecraft/world/gen/chunk/NoiseChunkGenerator verticalNoiseResolution I
+accessible field net/minecraft/world/gen/chunk/NoiseChunkGenerator noiseSizeY I
+mutable field net/minecraft/world/gen/chunk/NoiseChunkGenerator horizontalNoiseResolution I
+mutable field net/minecraft/world/gen/chunk/NoiseChunkGenerator verticalNoiseResolution I
+mutable field net/minecraft/world/gen/chunk/NoiseChunkGenerator noiseSizeY I

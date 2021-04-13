@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "axis=z": { "model": "miners_horizon:block/miner_portal_ew" },
-        "axis=x": { "model": "miners_horizon:block/miner_portal_ns" }
-    }
-}
