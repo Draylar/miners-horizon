@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "miners_horizon",
+  "id": "minershorizon",
   "version": "${version}",
 
   "name": "Miner's Horizon",
