@@ -1,12 +1,15 @@
 package draylar.horizon;
 
+import draylar.horizon.registry.HorizonBlocks;
 import draylar.horizon.registry.HorizonWorld;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.block.OreBlock;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
@@ -16,6 +19,8 @@ public class MinersHorizonClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        BlockRenderLayerMap.INSTANCE.putBlock(HorizonBlocks.HORIZON_PORTAL, RenderLayer.getTranslucent());
+
         // Register a color provider for stone/ore blocks.
         // This color provider is used for the darkened layers in the Miner's Horizon.
         for (Block entry : Registry.BLOCK) {

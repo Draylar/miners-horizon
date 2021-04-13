@@ -1,6 +1,6 @@
 package draylar.horizon.util;
 
-import draylar.horizon.block.MinerPortalBlock;
+import draylar.horizon.block.HorizonPortalBlock;
 import draylar.horizon.registry.HorizonBlocks;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
@@ -140,7 +140,7 @@ public class HorizonPortalHelper {
                     return i;
                 }
 
-                if (blockState.isOf(HorizonBlocks.MINER_PORTAL)) {
+                if (blockState.isOf(HorizonBlocks.HORIZON_PORTAL)) {
                     ++this.foundPortalBlocks;
                 }
             }
@@ -155,7 +155,7 @@ public class HorizonPortalHelper {
      * @return whether the state is valid when inside the portal
      */
     private static boolean validStateInsidePortal(BlockState state) {
-        return state.isAir() || state.isOf(HorizonBlocks.MINER_PORTAL);
+        return state.isAir() || state.isOf(HorizonBlocks.HORIZON_PORTAL);
     }
 
     /**
@@ -166,7 +166,7 @@ public class HorizonPortalHelper {
     }
 
     public void createPortal() {
-        BlockState portalState = HorizonBlocks.MINER_PORTAL.getDefaultState().with(MinerPortalBlock.AXIS, this.axis);
+        BlockState portalState = HorizonBlocks.HORIZON_PORTAL.getDefaultState().with(HorizonPortalBlock.AXIS, this.axis);
         BlockPos.iterate(this.lowerCorner, this.lowerCorner.offset(Direction.UP, this.height - 1).offset(this.negativeDir, this.width - 1)).forEach((blockPos) -> {
             this.world.setBlockState(blockPos, portalState, 18);
         });

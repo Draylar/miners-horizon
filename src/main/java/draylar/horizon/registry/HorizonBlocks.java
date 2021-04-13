@@ -1,13 +1,13 @@
 package draylar.horizon.registry;
 
 import draylar.horizon.MinersHorizon;
-import draylar.horizon.block.MinerPortalBlock;
+import draylar.horizon.block.HorizonPortalBlock;
 import net.minecraft.block.Block;
 import net.minecraft.util.registry.Registry;
 
 public class HorizonBlocks {
 
-    public static final MinerPortalBlock MINER_PORTAL = register("miner_portal", new MinerPortalBlock());
+    public static final HorizonPortalBlock HORIZON_PORTAL = register("horizon_portal", new HorizonPortalBlock());
 
     public static void init() {
 

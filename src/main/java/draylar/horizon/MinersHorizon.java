@@ -5,33 +5,24 @@ import draylar.horizon.registry.HorizonBiomes;
 import draylar.horizon.registry.HorizonBlocks;
 import draylar.horizon.registry.HorizonWorld;
 import draylar.horizon.util.HorizonPortalHelper;
-import draylar.horizon.world.RockySurfaceBuilder;
-import draylar.horizon.world.MiningCaveCarver;
-import draylar.horizon.world.MinersHorizonChunkGenerator;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.minecraft.block.Blocks;
+import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.ProbabilityConfig;
-import net.minecraft.world.gen.carver.Carver;
-import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
-import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
+import net.minecraft.world.poi.PointOfInterestType;
 
 import java.util.Optional;
 
 public class MinersHorizon implements ModInitializer {
 
     public static final MinersHorizonConfig CONFIG = AutoConfig.register(MinersHorizonConfig.class, GsonConfigSerializer::new).getConfig();
+    public static final PointOfInterestType HORIZON_PORTAL = PointOfInterestHelper.register(id("horizon_portal"), 0, 1, HorizonBlocks.HORIZON_PORTAL);
 
     @Override
     public void onInitialize() {

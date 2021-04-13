@@ -2,12 +2,11 @@ package draylar.horizon.block;
 
 import draylar.horizon.registry.HorizonBlocks;
 import draylar.horizon.registry.HorizonWorld;
+import draylar.horizon.util.HorizonPortalForcer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
-import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
-import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.NetherPortalBlock;
@@ -18,15 +17,19 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.PortalUtil;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.AreaHelper;
 
+import java.util.Optional;
 import java.util.Random;
 
-public class MinerPortalBlock extends NetherPortalBlock {
+public class HorizonPortalBlock extends NetherPortalBlock {
 
-    public MinerPortalBlock() {
-        super(FabricBlockSettings.copy(Blocks.NETHER_PORTAL).build());
+    public HorizonPortalBlock() {
+        super(FabricBlockSettings.copy(Blocks.NETHER_PORTAL).nonOpaque());
     }
 
     @Override
@@ -76,16 +79,21 @@ public class MinerPortalBlock extends NetherPortalBlock {
                     target = ((ServerWorld) world).getServer().getWorld(HorizonWorld.MINERS_HORIZON);
                 }
 
-                // create portal if it does not exist
-                if(!target.getBlockState(entity.getBlockPos()).getBlock().equals(HorizonBlocks.MINER_PORTAL)) {
-                    buildPortal(target, entity.getBlockPos());
+                HorizonPortalForcer portalForcer = new HorizonPortalForcer(target);
+
+                // find portal, or create one if it does not exist
+                Optional<PortalUtil.Rectangle> portal = portalForcer.findPortal(pos, entity.world.getRegistryKey().equals(HorizonWorld.MINERS_HORIZON));
+                if (!portal.isPresent()) {
+                    portal = portalForcer.createPortal(pos, Direction.Axis.X);
                 }
 
-                FabricDimensions.teleport(entity, target, new TeleportTarget(entity.getPos(), entity.getVelocity(), entity.yaw, entity.pitch));
+                // double-check that portal is valid
+                if(portal.isPresent()) {
+                    TeleportTarget t = AreaHelper.method_30484(target, portal.get(), Direction.Axis.X, Vec3d.ZERO, entity.getDimensions(entity.getPose()), entity.getVelocity(), entity.yaw, entity.pitch);
+                    FabricDimensions.teleport(entity, target, t);
+                }
             }
         }
-
-        super.onEntityCollision(state, world, pos, entity);
     }
 
     private void buildPortal(ServerWorld world, BlockPos pos) {
@@ -99,7 +107,7 @@ public class MinerPortalBlock extends NetherPortalBlock {
         // portal
         for(int x = 0; x <= 1; x++) {
             for(int y = 0; y <= 2; y++) {
-                world.setBlockState(pos.up(y).north(x), HorizonBlocks.MINER_PORTAL.getDefaultState().with(NetherPortalBlock.AXIS, Direction.Axis.Z));
+                world.setBlockState(pos.up(y).north(x), HorizonBlocks.HORIZON_PORTAL.getDefaultState().with(NetherPortalBlock.AXIS, Direction.Axis.Z));
             }
         }
     }
