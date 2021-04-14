@@ -84,7 +84,7 @@ public class HorizonWorld {
                             Registry.BLOCK.get(new Identifier(ore.block)).getDefaultState(),
                             ore.size)
                     )
-                            .decorate(Decorator.RANGE.configure(new RangeDecoratorConfig(ore.minY, 0, ore.maxY)))
+                            .decorate(Decorator.RANGE.configure(new RangeDecoratorConfig(ore.minY, ore.minY, ore.maxY)))
                             .spreadHorizontally()
                             .repeat(ore.count));
 
