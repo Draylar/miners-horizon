@@ -1,10 +1,13 @@
 package draylar.horizon.registry;
 
+import dev.latvian.kubejs.script.ScriptType;
 import draylar.horizon.MinersHorizon;
 import draylar.horizon.config.OreConfig;
+import draylar.horizon.kubejs.MinersHorizonOreEventJS;
 import draylar.horizon.world.MinersHorizonChunkGenerator;
 import draylar.horizon.world.MiningCaveCarver;
 import draylar.horizon.world.RockySurfaceBuilder;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
@@ -15,6 +18,8 @@ import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.carver.Carver;
 import net.minecraft.world.gen.carver.CarverConfig;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
+import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
@@ -22,6 +27,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class HorizonWorld {
@@ -59,8 +65,18 @@ public class HorizonWorld {
 
     public static void init() {
         Registry.register(Registry.CHUNK_GENERATOR, MinersHorizon.id("horizon"), MinersHorizonChunkGenerator.CODEC);
+    }
 
-        for (OreConfig ore : MinersHorizon.CONFIG.oreConfigList) {
+    public static void loadOres() {
+        List<OreConfig> ores = new ArrayList<>(Arrays.asList(MinersHorizon.CONFIG.oreConfigList));
+
+        // Load/build all ore configs if KubeJS is loaded
+        if(FabricLoader.getInstance().isModLoaded("kubejs")) {
+            ores.addAll(MinersHorizonOreEventJS.build());
+        }
+
+        // Register each ore
+        for (OreConfig ore : ores) {
             ConfiguredFeature<?, ?> feature = register(
                     String.format("%s_%d_%d_%d", new Identifier(ore.block).getPath(), ore.size, ore.count, ore.maxY),
                     Feature.ORE.configure(new OreFeatureConfig(
@@ -68,7 +84,7 @@ public class HorizonWorld {
                             Registry.BLOCK.get(new Identifier(ore.block)).getDefaultState(),
                             ore.size)
                     )
-                            .rangeOf(ore.maxY)
+                            .decorate(Decorator.RANGE.configure(new RangeDecoratorConfig(ore.minY, 0, ore.maxY)))
                             .spreadHorizontally()
                             .repeat(ore.count));
 
