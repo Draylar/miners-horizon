@@ -4,7 +4,7 @@ manifestVersion = 0
   type = "mod"
   name = "miners-horizon"
   description = "Adds in a dimension specifically for mining."
-  version = "1.6.0"
+  version = "1.6.1"
   platform = "fabric"
   license = "MIT"
 
