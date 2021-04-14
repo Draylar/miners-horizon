@@ -17,6 +17,9 @@ repositories {
 	maven {
 		url = "https://jitpack.io"
 	}
+
+	maven { url "https://www.cursemaven.com" }
+	maven { url "https://maven.shedaniel.me" }
 }
 
 dependencies {
@@ -31,6 +34,11 @@ dependencies {
 	// Config
 	modImplementation 'com.github.Draylar.omega-config:omega-config-base:1.0.4-beta'
 	include 'com.github.Draylar.omega-config:omega-config-base:1.0.4-beta:min'
+
+	// KubeJS for compatibility testing
+	modImplementation 'curse.maven:kubejs-395864:3269809'
+	modImplementation 'curse.maven:rhino-416294:3187177'
+	modImplementation 'me.shedaniel:architectury-fabric:1.7.117'
 }
 
 processResources {
