@@ -3,6 +3,7 @@ package draylar.horizon.registry;
 import dev.latvian.kubejs.script.ScriptType;
 import draylar.horizon.MinersHorizon;
 import draylar.horizon.config.OreConfig;
+import draylar.horizon.kubejs.MinersHorizonConfigEventJS;
 import draylar.horizon.kubejs.MinersHorizonOreEventJS;
 import draylar.horizon.world.MinersHorizonChunkGenerator;
 import draylar.horizon.world.MiningCaveCarver;
@@ -29,6 +30,7 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HorizonWorld {
 
@@ -69,6 +71,15 @@ public class HorizonWorld {
 
     public static void loadOres() {
         List<OreConfig> ores = new ArrayList<>(Arrays.asList(MinersHorizon.CONFIG.oreConfigList));
+
+        // Filter config ores if KubeJS is loaded
+        if(FabricLoader.getInstance().isModLoaded("kubejs")) {
+            ores = ores.stream().filter(config -> {
+                MinersHorizonConfigEventJS event = new MinersHorizonConfigEventJS(config);
+                event.post(ScriptType.STARTUP, "horizon.config");
+                return !event.isCancelled();
+            }).collect(Collectors.toList());
+        }
 
         // Load/build all ore configs if KubeJS is loaded
         if(FabricLoader.getInstance().isModLoaded("kubejs")) {
