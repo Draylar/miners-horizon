@@ -18,6 +18,11 @@ public class StoneHueMixin {
 
     @Inject(at = @At("HEAD"), method = "hasColor", cancellable = true)
     private void hasColor(CallbackInfoReturnable<Boolean> info) {
+        // Prevent odd NPE with other mods
+        if(sprite == null) {
+            return;
+        }
+
         if (UndergroundOreChecker.shouldBeHued(sprite.getId())) {
             info.setReturnValue(true);
         }
@@ -25,6 +30,11 @@ public class StoneHueMixin {
 
     @Inject(at = @At("HEAD"), method = "getColorIndex", cancellable = true)
     private void getColorIndex(CallbackInfoReturnable<Integer> info) {
+        // Prevent odd NPE with other mods
+        if(sprite == null) {
+            return;
+        }
+
         if (UndergroundOreChecker.shouldBeHued(sprite.getId())) {
             info.setReturnValue(0);
         }
