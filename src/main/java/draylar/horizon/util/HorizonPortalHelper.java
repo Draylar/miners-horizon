@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.PortalUtil;
+import net.minecraft.world.BlockLocating;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
@@ -176,7 +176,7 @@ public class HorizonPortalHelper {
         return this.isValid() && this.foundPortalBlocks == this.width * this.height;
     }
 
-    public static Vec3d method_30494(PortalUtil.Rectangle rectangle, Direction.Axis axis, Vec3d vec3d, EntityDimensions entityDimensions) {
+    public static Vec3d method_30494(BlockLocating.Rectangle rectangle, Direction.Axis axis, Vec3d vec3d, EntityDimensions entityDimensions) {
         double d = (double)rectangle.width - (double)entityDimensions.width;
         double e = (double)rectangle.height - (double)entityDimensions.height;
         BlockPos blockPos = rectangle.lowerLeft;
@@ -202,7 +202,7 @@ public class HorizonPortalHelper {
         return new Vec3d(h, j, k);
     }
 
-    public static TeleportTarget method_30484(ServerWorld serverWorld, PortalUtil.Rectangle rectangle, Direction.Axis axis, Vec3d vec3d, EntityDimensions entityDimensions, Vec3d vec3d2, float f, float g) {
+    public static TeleportTarget method_30484(ServerWorld serverWorld, BlockLocating.Rectangle rectangle, Direction.Axis axis, Vec3d vec3d, EntityDimensions entityDimensions, Vec3d vec3d2, float f, float g) {
         BlockPos blockPos = rectangle.lowerLeft;
         BlockState blockState = serverWorld.getBlockState(blockPos);
         Direction.Axis axis2 = (Direction.Axis)blockState.get(Properties.HORIZONTAL_AXIS);

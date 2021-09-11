@@ -18,7 +18,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.PortalUtil;
+import net.minecraft.world.BlockLocating;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.AreaHelper;
@@ -83,14 +83,14 @@ public class HorizonPortalBlock extends NetherPortalBlock {
                 HorizonPortalForcer portalForcer = new HorizonPortalForcer(target);
 
                 // find portal, or create one if it does not exist
-                Optional<PortalUtil.Rectangle> portal = portalForcer.findPortal(pos, entity.world.getRegistryKey().equals(HorizonWorld.MINERS_HORIZON));
+                Optional<BlockLocating.Rectangle> portal = portalForcer.findPortal(pos, entity.world.getRegistryKey().equals(HorizonWorld.MINERS_HORIZON));
                 if (!portal.isPresent()) {
                     portal = portalForcer.createPortal(pos, Direction.Axis.X);
                 }
 
                 // double-check that portal is valid
                 if(portal.isPresent()) {
-                    TeleportTarget t = AreaHelper.method_30484(target, portal.get(), Direction.Axis.X, Vec3d.ZERO, entity.getDimensions(entity.getPose()), entity.getVelocity(), entity.yaw, entity.pitch);
+                    TeleportTarget t = AreaHelper.getNetherTeleportTarget(target, portal.get(), Direction.Axis.X, Vec3d.ZERO, entity.getDimensions(entity.getPose()), entity.getVelocity(), entity.getYaw(), entity.getPitch());
                     FabricDimensions.teleport(entity, target, t);
                 }
             }

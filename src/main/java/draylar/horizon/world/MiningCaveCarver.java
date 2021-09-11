@@ -3,15 +3,15 @@ package draylar.horizon.world;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Blocks;
-import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.carver.CaveCarver;
+import net.minecraft.world.gen.carver.CaveCarverConfig;
 
 import java.util.Random;
 
 public class MiningCaveCarver extends CaveCarver {
 
-    public MiningCaveCarver(Codec<ProbabilityConfig> codec, int i) {
-        super(codec, i);
+    public MiningCaveCarver(Codec<CaveCarverConfig> codec) {
+        super(codec);
 
         this.alwaysCarvableBlocks = ImmutableSet.of(
                 Blocks.STONE,
@@ -45,11 +45,6 @@ public class MiningCaveCarver extends CaveCarver {
                 Blocks.MYCELIUM,
                 Blocks.SNOW,
                 Blocks.PACKED_ICE);
-    }
-
-    @Override
-    public int getCaveY(Random random) {
-        return random.nextInt(random.nextInt(240) + 8);
     }
 
     @Override

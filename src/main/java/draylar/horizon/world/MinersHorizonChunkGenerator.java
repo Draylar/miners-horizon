@@ -90,7 +90,18 @@ public class MinersHorizonChunkGenerator extends NoiseChunkGenerator {
                     }
                 }
 
-                BuiltinRegistries.BIOME.get(HorizonBiomes.ROCKY_PLAINS_KEYS).buildSurface(new Random(234612362L * posX + -8264616432452L * posZ), chunk, posX, posZ, 255, surfaceNoise.sample(posX, posZ, 1, 1), Blocks.STONE.getDefaultState(), net.minecraft.block.Blocks.WATER.getDefaultState(), getSeaLevel(), seed);
+                BuiltinRegistries.BIOME.get(HorizonBiomes.ROCKY_PLAINS_KEYS).buildSurface(
+                        new Random(234612362L * posX + -8264616432452L * posZ),
+                        chunk,
+                        posX,
+                        posZ,
+                        255,
+                        surfaceNoise.sample(posX, posZ, 1, 1),
+                        Blocks.STONE.getDefaultState(),
+                        net.minecraft.block.Blocks.WATER.getDefaultState(),
+                        getSeaLevel(),
+                        0,
+                        seed);
             }
         }
 

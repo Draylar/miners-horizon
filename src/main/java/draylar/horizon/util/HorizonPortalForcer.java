@@ -9,8 +9,8 @@ import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.*;
+import net.minecraft.world.BlockLocating;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.PortalUtil;
 import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.poi.PointOfInterest;
 import net.minecraft.world.poi.PointOfInterestStorage;
@@ -27,7 +27,7 @@ public class HorizonPortalForcer {
         this.world = world;
     }
 
-    public Optional<PortalUtil.Rectangle> findPortal(BlockPos blockPos, boolean goingToHorizon) {
+    public Optional<BlockLocating.Rectangle> findPortal(BlockPos blockPos, boolean goingToHorizon) {
         PointOfInterestStorage storage = this.world.getPointOfInterestStorage();
         int radius = goingToHorizon ? 16 : 128;
         storage.preloadChunks(this.world, blockPos, radius);
@@ -43,7 +43,7 @@ public class HorizonPortalForcer {
             this.world.getChunkManager().addTicket(ChunkTicketType.PORTAL, new ChunkPos(pos), 3, pos);
             BlockState state = this.world.getBlockState(pos);
 
-            return PortalUtil.getLargestRectangle(
+            return BlockLocating.getLargestRectangle(
                     pos,
                     state.get(Properties.HORIZONTAL_AXIS),
                     21,
@@ -53,16 +53,16 @@ public class HorizonPortalForcer {
         });
     }
 
-    public Optional<PortalUtil.Rectangle> createPortal(BlockPos blockPos, Direction.Axis axis) {
+    public Optional<BlockLocating.Rectangle> createPortal(BlockPos blockPos, Direction.Axis axis) {
         Direction direction = Direction.get(Direction.AxisDirection.POSITIVE, axis);
         double d = -1.0D;
         BlockPos blockPos2 = null;
         double e = -1.0D;
         BlockPos blockPos3 = null;
         WorldBorder worldBorder = this.world.getWorldBorder();
-        int i = this.world.getDimensionHeight() - 1;
+        int i = this.world.getHeight() - 1;
         BlockPos.Mutable mutable = blockPos.mutableCopy();
-        Iterator<BlockPos.Mutable> var13 = BlockPos.method_30512(blockPos, 16, Direction.EAST, Direction.SOUTH).iterator();
+        Iterator<BlockPos.Mutable> var13 = BlockPos.iterateInSquare(blockPos, 16, Direction.EAST, Direction.SOUTH).iterator();
 
         while(true) {
             BlockPos.Mutable mutable2;
@@ -77,7 +77,7 @@ public class HorizonPortalForcer {
 
                         int o;
                         if (d == -1.0D) {
-                            blockPos2 = (new BlockPos(blockPos.getX(), MathHelper.clamp(blockPos.getY(), 70, this.world.getDimensionHeight() - 10), blockPos.getZ())).toImmutable();
+                            blockPos2 = (new BlockPos(blockPos.getX(), MathHelper.clamp(blockPos.getY(), 70, this.world.getHeight() - 10), blockPos.getZ())).toImmutable();
                             Direction direction2 = direction.rotateYClockwise();
                             if (!worldBorder.contains(blockPos2)) {
                                 return Optional.empty();
@@ -112,7 +112,7 @@ public class HorizonPortalForcer {
                             }
                         }
 
-                        return Optional.of(new PortalUtil.Rectangle(blockPos2.toImmutable(), 2, 3));
+                        return Optional.of(new BlockLocating.Rectangle(blockPos2.toImmutable(), 2, 3));
                     }
 
                     mutable2 = var13.next();

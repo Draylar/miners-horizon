@@ -1,10 +1,10 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'fabric-loom' version '0.9-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 archivesBaseName = "miners-horizon"
 version = project.mod_version + "-" + project.minecraft_version
@@ -25,32 +25,19 @@ repositories {
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
-	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-	// dev modmenu & REI
-	modCompile "io.github.prospector:modmenu:${project.mod_menu_version}"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Config
 	modImplementation 'com.github.Draylar.omega-config:omega-config-base:1.0.8-1.17'
 	include 'com.github.Draylar.omega-config:omega-config-base:1.0.8-1.17'
-
-	// KubeJS for compatibility testing
-	modImplementation 'curse.maven:kubejs-395864:3269809'
-	modImplementation 'curse.maven:rhino-416294:3187177'
-	modImplementation 'me.shedaniel:architectury-fabric:1.7.117'
 }
 
 processResources {
 	inputs.property "version", project.version
 
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
+	filesMatching('fabric.mod.json') {
 		expand "version": project.version
-	}
-
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
 	}
 }
 
