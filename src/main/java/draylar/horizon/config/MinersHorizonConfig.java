@@ -28,6 +28,7 @@ public class MinersHorizonConfig implements Config {
             {
                     // default layer
                     new OreConfig("minecraft:coal_ore", 17, 30, 100, 255),
+                    new OreConfig("minecraft:copper_ore", 10, 6, 100, 255),
                     new OreConfig("minecraft:iron_ore", 9, 30, 100, 255),
                     new OreConfig("minecraft:gold_ore", 9, 2, 100, 140),
                     new OreConfig("minecraft:redstone_ore", 8, 8, 100, 120),
@@ -37,6 +38,7 @@ public class MinersHorizonConfig implements Config {
 
                     // zone 1
                     new OreConfig("minecraft:coal_ore", 17, 5, 60, 100),
+                    new OreConfig("minecraft:copper_ore", 10, 6, 60, 100),
                     new OreConfig("minecraft:iron_ore", 9, 5, 60, 100),
                     new OreConfig("minecraft:gold_ore", 9, 2, 60, 100),
                     new OreConfig("minecraft:redstone_ore", 8, 4, 60, 100),
@@ -45,6 +47,7 @@ public class MinersHorizonConfig implements Config {
                     new OreConfig("minecraft:emerald_ore", 8, 2, 60, 100),
 
                     // zone 2
+                    new OreConfig("minecraft:copper_ore", 10, 3, 30, 60),
                     new OreConfig("minecraft:gold_ore", 9, 4, 30, 60),
                     new OreConfig("minecraft:redstone_ore", 8, 6, 30, 60),
                     new OreConfig("minecraft:lapis_ore", 8, 4, 30, 60),
