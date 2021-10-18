@@ -28,8 +28,8 @@ public class MinersHorizon implements ModInitializer {
         HorizonBlocks.init();
         HorizonWorld.init();
 
-        // Register ores from config & KubeJS
-        HorizonWorld.loadOres();
+        // Register ores from config
+        HorizonWorld.registerOreHandlers();
 
         // Load biomes after ores are loaded
         HorizonBiomes.init();

@@ -5,6 +5,8 @@ import draylar.horizon.config.OreConfig;
 import draylar.horizon.world.MinersHorizonChunkGenerator;
 import draylar.horizon.world.MiningCaveCarver;
 import draylar.horizon.world.RockySurfaceBuilder;
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.floatprovider.ConstantFloatProvider;
@@ -77,23 +79,42 @@ public class HorizonWorld {
         Registry.register(Registry.CHUNK_GENERATOR, MinersHorizon.id("horizon"), MinersHorizonChunkGenerator.CODEC);
     }
 
-    public static void loadOres() {
+    public static void registerOreHandlers() {
         List<OreConfig> ores = new ArrayList<>(Arrays.asList(MinersHorizon.CONFIG.oreConfigList));
 
-        // Register each ore
-        for (OreConfig ore : ores) {
-            ConfiguredFeature<?, ?> feature = register(
-                    String.format("%s_%d_%d_%d", new Identifier(ore.block).getPath(), ore.size, ore.count, ore.maxY),
-                    Feature.ORE.configure(new OreFeatureConfig(
-                            OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
-                            Registry.BLOCK.get(new Identifier(ore.block)).getDefaultState(),
-                            ore.size)
-                    )
-                            .decorate(Decorator.RANGE.configure(new RangeDecoratorConfig(UniformHeightProvider.create(YOffset.fixed(ore.minY), YOffset.fixed(ore.maxY)))))
-                            .spreadHorizontally()
-                            .repeat(ore.count));
+        // Handle ores that have already been registered.
+        Registry.BLOCK.getEntries().forEach(entry -> {
+            RegistryKey<Block> key = entry.getKey();
+            String id = key.getValue().toString();
 
-            ORES.add(feature);
-        }
+            // Load every Ore Config with a matching ID.
+            ores.stream().filter(config -> config.block.equals(id)).forEach(config -> {
+                ORES.add(load(config, entry.getValue()));
+            });
+        });
+
+        // TODO: there is a chance this slows down game loading. The question is how much?
+        // 100 entries * 1,000 registry events = 100,000 filter checks.
+        // Register a callback to add in future ores.
+        RegistryEntryAddedCallback.event(Registry.BLOCK).register((rawId, id, object) -> {
+
+            // Load every Ore Config with a matching ID.
+            ores.stream().filter(config -> config.block.equals(id.toString())).forEach(config -> {
+                ORES.add(load(config, object));
+            });
+        });
+    }
+
+    private static ConfiguredFeature<?, ?> load(OreConfig config, Block block) {
+        return register(
+                String.format("%s_%d_%d_%d", new Identifier(config.block).getPath(), config.size, config.count, config.maxY),
+                Feature.ORE.configure(new OreFeatureConfig(
+                        OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
+                        block.getDefaultState(),
+                        config.size)
+                )
+                        .decorate(Decorator.RANGE.configure(new RangeDecoratorConfig(UniformHeightProvider.create(YOffset.fixed(config.minY), YOffset.fixed(config.maxY)))))
+                        .spreadHorizontally()
+                        .repeat(config.count));
     }
 }
