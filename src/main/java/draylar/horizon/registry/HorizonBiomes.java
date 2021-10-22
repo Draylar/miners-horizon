@@ -17,7 +17,6 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 
 public class HorizonBiomes {
 
-    private static final Biome ROCKY_PLAINS = createRockyPlains();
     public static final RegistryKey<Biome> ROCKY_PLAINS_KEYS = RegistryKey.of(Registry.BIOME_KEY, MinersHorizon.id("rocky_plains"));
 
     private HorizonBiomes() {
@@ -25,7 +24,7 @@ public class HorizonBiomes {
     }
 
     public static void init() {
-        Registry.register(BuiltinRegistries.BIOME, ROCKY_PLAINS_KEYS.getValue(), ROCKY_PLAINS);
+        Registry.register(BuiltinRegistries.BIOME, ROCKY_PLAINS_KEYS.getValue(), createRockyPlains());
     }
 
     public static Biome createRockyPlains() {
