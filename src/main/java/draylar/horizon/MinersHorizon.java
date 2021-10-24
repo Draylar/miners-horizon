@@ -1,12 +1,12 @@
 package draylar.horizon;
 
 import draylar.horizon.config.MinersHorizonConfig;
-import draylar.horizon.registry.HorizonBiomes;
 import draylar.horizon.registry.HorizonBlocks;
 import draylar.horizon.registry.HorizonWorld;
 import draylar.horizon.util.HorizonPortalHelper;
 import draylar.omegaconfig.OmegaConfig;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.minecraft.item.ItemStack;
@@ -31,9 +31,6 @@ public class MinersHorizon implements ModInitializer {
         // Register ores from config
         HorizonWorld.registerOreHandlers();
 
-        // Load biomes after ores are loaded
-        HorizonBiomes.init();
-
         // The following callback is used for portal activation via any Pickaxe.
         UseBlockCallback.EVENT.register((player, world, hand, blockHitResult) -> {
             if(!world.isClient) {
@@ -48,6 +45,8 @@ public class MinersHorizon implements ModInitializer {
 
             return ActionResult.PASS;
         });
+
+        ServerLifecycleEvents.SERVER_STARTING.register(ms -> HorizonWorld.ensureBlocksAreRegistered());
     }
 
     public static Identifier id(String path) {

@@ -4,6 +4,7 @@ import draylar.horizon.registry.HorizonBlocks;
 import draylar.horizon.registry.HorizonWorld;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
@@ -19,6 +20,8 @@ public class MinersHorizonClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        ClientLifecycleEvents.CLIENT_STARTED.register(mc -> HorizonWorld.ensureBlocksAreRegistered());
+
         BlockRenderLayerMap.INSTANCE.putBlock(HorizonBlocks.HORIZON_PORTAL, RenderLayer.getTranslucent());
 
         // Register a color provider for stone/ore blocks.

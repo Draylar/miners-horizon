@@ -26,9 +26,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class HorizonWorld {
 
@@ -79,30 +77,39 @@ public class HorizonWorld {
         Registry.register(Registry.CHUNK_GENERATOR, MinersHorizon.id("horizon"), MinersHorizonChunkGenerator.CODEC);
     }
 
+    private static final Map<String, List<OreConfig>> REMAINING_BLOCKS = new TreeMap<>();
+
     public static void registerOreHandlers() {
         List<OreConfig> ores = new ArrayList<>(Arrays.asList(MinersHorizon.CONFIG.oreConfigList));
 
+        for (OreConfig ore : ores) {
+            REMAINING_BLOCKS.computeIfAbsent(ore.block, s -> new ArrayList<>()).add(ore);
+        }
+
         // Handle ores that have already been registered.
         Registry.BLOCK.getEntries().forEach(entry -> {
-            RegistryKey<Block> key = entry.getKey();
-            String id = key.getValue().toString();
-
-            // Load every Ore Config with a matching ID.
-            ores.stream().filter(config -> config.block.equals(id)).forEach(config -> {
-                ORES.add(load(config, entry.getValue()));
-            });
+            processRegisteredBlock(entry.getKey().getValue().toString(), entry.getValue());
         });
 
-        // TODO: there is a chance this slows down game loading. The question is how much?
-        // 100 entries * 1,000 registry events = 100,000 filter checks.
         // Register a callback to add in future ores.
         RegistryEntryAddedCallback.event(Registry.BLOCK).register((rawId, id, object) -> {
-
-            // Load every Ore Config with a matching ID.
-            ores.stream().filter(config -> config.block.equals(id.toString())).forEach(config -> {
-                ORES.add(load(config, object));
-            });
+            processRegisteredBlock(id.toString(), object);
         });
+    }
+
+    private static void processRegisteredBlock(String id, Block block) {
+        List<OreConfig> configs = REMAINING_BLOCKS.remove(id);
+
+        if (configs != null) {
+            for (OreConfig config : configs) {
+                ORES.add(load(config, block));
+            }
+
+            if (REMAINING_BLOCKS.size() == 0) {
+                // Register the biome if all ores have been loaded.
+                HorizonBiomes.init();
+            }
+        }
     }
 
     private static ConfiguredFeature<?, ?> load(OreConfig config, Block block) {
@@ -116,5 +123,15 @@ public class HorizonWorld {
                         .decorate(Decorator.RANGE.configure(new RangeDecoratorConfig(UniformHeightProvider.create(YOffset.fixed(config.minY), YOffset.fixed(config.maxY)))))
                         .spreadHorizontally()
                         .repeat(config.count));
+    }
+
+    public static void ensureBlocksAreRegistered() {
+        if (REMAINING_BLOCKS.size() > 0) {
+            String errorMessage = String.format(
+                    "Miners Horizon: Could not register biome because the following blocks do not exist, yet they were specified in the config:%n%s.",
+                    String.join(", ", REMAINING_BLOCKS.keySet().toArray(String[]::new))
+            );
+            throw new RuntimeException(errorMessage);
+        }
     }
 }
